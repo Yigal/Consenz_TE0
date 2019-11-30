@@ -1,0 +1,111 @@
+<!--suppress CheckImageSize, CheckImageSize -->
+<v-card-text class="pt-0">
+  <div @click="routeAndToggle()" class="card-action-div cmp">
+    <div class="flexed">
+      <v-btn class="text-xs-right openArgsBtn cmp">
+        <span
+          class="bold ml-1">{{ argumentBySectionId(sectionId).length }}</span>
+        טיעונים
+        <span class="mr-2">ו-</span>
+        <span class="bold"> {{ commentsBySectionId(sectionId).length }}
+        </span>
+        <span class="mr-1"> תגובות בדיון </span>
+      </v-btn>
+    </div>
+  </div>
+  <transition name="slide-fade">
+    <div class="card-action-div arguments_container">
+      <v-list class="pa-0">
+        <div class="mr-4 pr-2" :style="{'border-right': '1.5px solid #d1c3dc'}">
+
+          <div v-for="(argument, index) in visibleArguments">
+            <v-layout column>
+              <v-layout column pa-1 :style="[{'border-top': '1.2px solid'}, {'border-color':
+                `${getBorderTopColor(argument.type)}`}]">
+                <content-box :item='argument' :itemContent="argument.content"
+                  :itemContentHtml="argument.contentHtml">
+                </content-box>
+                <v-layout row align-center justify-space-between pa-1>
+                  <v-btn small class="text-xs-right openArgsBtn cmp"
+                    v-if="commentsByArgumentId(argument.id).length > 0"
+                    @click="toggleComments(argument.id)">
+                    <span>
+                      <span
+                        class="bold">{{ commentsByArgumentId(argument.id).length }}</span>
+                      תגובות לטיעון
+                    </span>
+                  </v-btn>
+                  <div v-else>
+                    <v-layout class="btn_arguments" column justify-end>
+                      <v-layout justify-end>
+                        <v-btn @click="addComment(argument.id)"
+                          class="bcp80 cw">
+                          הוספת תגובה</v-btn>
+                      </v-layout>
+                    </v-layout>
+                  </div>
+                  <div>
+                    <v-layout row justify-end>
+                      <div>
+                        <v-layout v-if="Object.keys(argument).includes('type')"
+                          class="convinced-button-container" align-end
+                          justify-end>
+                          <v-badge right :color="getColor(argument.type)"
+                            class="mf">
+                            <template v-slot:badge>
+                              <span
+                                class="badge-location">{{argument.convinced.length}}</span>
+                            </template>
+                            <span>
+                              <v-btn @click="convinced(argument)"
+                                :loading="loading"
+                                @click.native="loader = 'loading'"
+                                :style="styleConvincedButtonObject(argument)"
+                                class="ma-0">
+                                השתכנעתי</v-btn>
+                            </span>
+                          </v-badge>
+                        </v-layout>
+                      </div>
+                    </v-layout>
+                  </div>
+                </v-layout>
+                <transition name="slide-fade">
+                  <card-comments :ref="'commentsComponent' + argument.id"
+                    :argumentId="argument.id"></card-comments>
+                </transition>
+              </v-layout>
+            </v-layout>
+          </div>
+        </div>
+        <div v-if="isDisplayed">
+          <v-layout class="btn_arguments" column mr-4 mt-3 pr-2 pt-2
+            v-bind:style="{'border-top': '1px solid #d1d1d1'}">
+            <v-layout justify-space-between>
+              <v-btn @click="addNewArgument('pros')" class="bcb cw">הוסף
+                טיעון בעד
+              </v-btn>
+              <v-btn @click="addNewArgument('cons')" class="cw" color="error">
+                הוסף
+                טיעון נגד
+              </v-btn>
+            </v-layout>
+            <v-btn @click="addNewArgument('comment')" class="cw bcp80"> הוספת
+              תגובה להצעה
+            </v-btn>
+          </v-layout>
+        </div>
+        <v-layout pa-1 mr-4
+          v-if="!isDisplayed && argumentBySectionId(sectionId).length > 1">
+          <span @click="routeAndToggle()" class="more-comments pointer">הצג
+            את
+            כל הטיעונים</span>
+        </v-layout>
+      </v-list>
+
+      <div :id="section.id" class="pa-2">
+        <div></div>
+      </div>
+    </div>
+  </transition>
+</v-card-text>

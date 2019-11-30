@@ -1,0 +1,29 @@
+@import "../../main.scss";
+
+.container_btn {
+  display: flex !important;
+  justify-content: flex-end !important;
+  padding-top: 15px;
+
+  .v-btn {
+    border-radius: 8px;
+    padding: 0px 25px !important;
+  }
+}
+
+.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) .v-input__slot {
+  box-shadow: 0 0px 1px -2px rgba(0, 0, 0, 0), 0 2px 2px 0 rgba(0, 0, 0, 0),
+    0 1px 5px 0 rgba(0, 0, 0, 0) !important;
+  -webkit-box-shadow: 0 0px 1px -2px rgba(0, 0, 0, 0),
+    0 2px 2px 0 rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0) !important;
+}
+
+.theme--light.v-input:not(.v-input--is-disabled) input,
+.theme--light.v-input:not(.v-input--is-disabled) textarea {
+  color: #736a6a !important;
+}
+
+.theme--light.v-text-field--outline>.v-input__control>.v-input__slot {
+  border-width: 1px !important;
+  border-color: #736a6a !important;
+}

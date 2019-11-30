@@ -1,0 +1,26 @@
+<v-card class="mb-2">
+  <CardTitle :sectionsLength="sectionsLength" :sectionId="section.id"
+    :pageStatus="pageStatus" :sectionIndex="sectionIndex" :index="index"
+    v-on:switchDisplays="switchDisplays()"
+    :sectionAcceptedAt="section.acceptedAt" :sectionTopic="section.topic"
+    :sectionRejectedAt="section.deadline">
+  </CardTitle>
+  <CardText :isAddingNewArgument="isAddingNewArgument" :pageStatus="pageStatus"
+    :parentSectionId="parentSectionId" :section="section"></CardText>
+  <CardVoting v-on:userVoted="onUserVoted" :pageStatus="pageStatus"
+    :section="section" :sectionIndex="sectionIndex"
+    :parentSectionId="parentSectionId" :isRejectedFeed="isRejectedFeed">
+  </CardVoting>
+  <v-card-text class="pa-0 pr-4"
+    v-if="isUserEditor && isDynamicFeed(pageStatus)">
+    <v-checkbox v-model="privilegeEditorCheckbox" label="הפעל פריווילגיית עורך">
+    </v-checkbox>
+  </v-card-text>
+  <CardArguments :ref="'arguments' + section.id" v-on:userVoted="onUserVoted"
+    :sectionsLength="sectionsLength" :section="section"
+    :sectionIndex="sectionIndex" :parentSectionId="parentSectionId"
+    v-on:toggleArguments="toggleArguments()"
+    :isFeedIsDiscussion="isFeedIsDiscussion" :pageStatus="pageStatus"
+    :isDisplayed="isDisplayed">
+  </CardArguments>
+</v-card>

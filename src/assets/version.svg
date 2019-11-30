@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.25 21.48">
+    <defs>
+        <style>
+            .cls-1,.cls-2,.cls-4{fill:none;}.cls-2,.cls-4{stroke:#69388c;stroke-linecap:round;stroke-linejoin:round;}.cls-2{stroke-width:0.5px;}.cls-3{clip-path:url(#clip-path);}
+        </style>
+        <clipPath id="clip-path">
+            <rect class="cls-1" x="0.06" y="0.06" width="16.08" height="21.31"/>
+        </clipPath>
+    </defs>
+    <title>Asset 4</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+            <path class="cls-2"
+                  d="M12.7,15.53H3.55m9.15-1.68H3.55m9.15-1.68H3.55m9.15-1.68H3.55M12.7,8.8H3.55M12.7,4.88h-3"/>
+            <g class="cls-3">
+                <path class="cls-4" d="M4.86,1V5.1H.5M15.75.5V21H.5v-16L5,.5Z"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,72 @@
+<div class="Document-sections-proposals bcm mf">
+    <v-container class="main-container">
+        <v-snackbar :bottom="snackbar.y === 'bottom'"
+            :color="getColor(enums.SECTION_STATUS.edited)" :left="snackbar.x ===
+            'left'" :multi-line="snackbar.mode === 'multi-line'"
+            :right="snackbar.x === 'right'" :timeout="snackbar.timeout"
+            :top="snackbar.y === 'top'" :vertical="snackbar.mode === 'vertical'"
+            v-model="snackbar.snackbar">
+            <v-layout align-start column>
+                <span class="my-title"> ההצעה התקבלה! </span>
+                <span>
+                    <router-link :to="{ path: 'section', query: {['sectionById']:
+                        pageSectionId, index: sectionIndex, status:
+                        enums.SECTION_STATUS.edited}}">
+                        לצפייה בדיון
+                    </router-link>
+                </span>
+            </v-layout>
+            <v-btn @click="closeSnackbar()" color="white" flat>
+                סגור
+            </v-btn>
+        </v-snackbar>
+        <v-layout column mb-5>
+            <div
+                v-if="sections.length===0&&pageStatus===enums.SECTION_STATUS.inTheVote">
+                <h3>
+                    <span>טרם פורסמו הצעות לסעיפים חדשים. </span>
+                    <span>להוספת הצעה חדשה לחצו על הכפתור שבתחתית המסך.</span>
+                </h3>
+            </div>
+            <div
+                v-if="sections.length===0&&pageStatus===enums.SECTION_STATUS.toEdit">
+                <h3>
+                    <span>טרם פורסמו הצעות לשינוי סעיף זה. </span>
+                    <span>להוספת הצעה חדשה לחצו על הכפתור שבתחתית
+                        המסך.</span>
+                </h3>
+            </div>
+            <div v-else v-for="(section, index) in sections">
+                <div>
+                    <SectionCard :index="index" :isAddingNewArgument="false"
+                        :key="section.id" :pageStatus="pageStatus"
+                        :parentSectionId="parentSectionId" :ref="section.id"
+                        :section="section" :sectionIndex="sectionIndex"
+                        :isRejectedFeed="isRejectedFeed"
+                        :sectionsLength="sections.length" v-if="section"
+                        :isFeedIsDiscussion="isFeedIsDiscussion">
+                    </SectionCard>
+                </div>
+            </div>
+            <v-layout mb-3 align-center justify-end v-if="(!isRejectedFeed() || isDynamicFeed(pageStatus)) &&
+                sectionRejectedLength > 0 && !isFeedIsDiscussion">
+                <v-btn round class="mf my-title cr openArgsBtn"
+                    @click="navigateToRejectedFeed()">
+                    להצעות שנדחו >>
+                </v-btn>
+            </v-layout>
+        </v-layout>
+
+        <div class="btn-add-container bcp"
+            v-if="showAddButton() && isParentSection(pageSectionId)">
+            <v-layout align-center justify-end>
+                <v-btn class="no_box_shadow" @click="addNewSection()" fixed fab
+                    v-bind:style="{'background-color':
+                    `${getColor(pageStatus)}`, 'color' : 'white',
+                    'border-radius': '50%'}">
+                    <v-icon>add</v-icon>
+                </v-btn>
+            </v-layout>
+        </div>
+    </v-container>
+</div>

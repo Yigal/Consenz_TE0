@@ -1,0 +1,10 @@
+{
+  "name": "consenz-test-environment-0",
+  "short_name": "consenz-test-environment-0",
+  "icons": [
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#9876b0"
+}

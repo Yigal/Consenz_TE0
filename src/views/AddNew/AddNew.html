@@ -1,0 +1,56 @@
+<div>
+  <v-container class="main-container" fluid>
+    <v-form v-model="valid" ref="form">
+      <v-card
+        v-bind:style="{ borderBottomColor: `${getColor(action)}`, borderBottomStyle: 'solid' }">
+        <div v-if="action===enums.SECTION_STATUS.toEdit">
+          <CardTitle :sectionId="section.id" :pageStatus="action"
+            :sectionIndex="0" :index="0" :isInAddComponent="true"></CardTitle>
+          <CardText :isAddingNewArgument="true"
+            :parentSectionId="parentSectionId" :editor="editor"
+            :section="section">
+          </CardText>
+        </div>
+        <div>
+          <v-card-title class="pr-2 my-title" v-bind:style="{ backgroundColor: `${getColor(action)}`, color:
+            action === enums.SECTION_STATUS.toEdit ? 'black' : 'white' }">
+            <p class="mf">
+              {{title}}
+            </p>
+          </v-card-title>
+          <v-container pb-0
+            v-if="action === enums.SECTION_STATUS.inTheVote && documentDivisionOfTopics">
+            <v-flex xs12>
+              <v-combobox required v-model="topic" :rules="topicRules"
+                :items="documentTopics" label="לבחירת נושא / הוספת הצעה לנושא
+                חדש">
+              </v-combobox>
+            </v-flex>
+          </v-container>
+          <v-container pr-3 pt-3>
+            <text-editor :editor="editor" :placeholderText="placeholderText"
+              :showEditorMenu="showEditorMenu">
+            </text-editor>
+            <!-- <v-textarea outline solo rows="7" type="text"
+              :placeholder="placeholderText" :label="placeholderText"
+              class="text-area" v-model="input">
+            </v-textarea> -->
+          </v-container>
+        </div>
+      </v-card>
+      <v-layout class="container_btn" align-center>
+        <span v-if="notificationsOff && action==='pros'"
+          v-bind:style="{color: `${getColor(action)}`}" class="mf pointer"
+          @click="goBack()">
+          פרסום הצעה ללא טיעון
+        </span>
+        <v-btn @click="submit"
+          v-bind:style="{backgroundColor: `${getColor(action)}`}" class="cw mf"
+          :loading="loading" :disabled="loading || !valid || !isValid()"
+          @click.native="loader = 'loading'">
+          {{btnText}}
+        </v-btn>
+      </v-layout>
+    </v-form>
+  </v-container>
+</div>

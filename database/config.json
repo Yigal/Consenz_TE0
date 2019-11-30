@@ -1,0 +1,15 @@
+{
+  "instance": "consenz-test-environment-0",
+  "collections": [
+    "arguments",
+    "comments",
+    "consenz",
+    "documents",
+    "sections",
+    "sectionsManager",
+    "users"
+  ],
+  "_comment": [
+    "sectionsManager"
+  ]
+}

@@ -1,0 +1,84 @@
+  <div>
+    <v-navigation-drawer :clipped="drawer.clipped" :fixed="drawer.fixed"
+      :permanent="drawer.permanent" v-model="drawer.open" app right>
+      <v-list>
+        <v-list-tile @click="makeDrawerPermanent" class="text-xs-right"
+          v-if="!drawer.permanent">
+          <v-list-tile-action>
+            <v-icon>account_circle</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title @click="signIn()" class="link" v-if="!isSignedIn">
+            הרשמה \ התחברות</v-list-tile-title>
+          <v-list-tile-title @click="logout()" class="link" v-else>התנתקות
+          </v-list-tile-title>
+          <v-list-tile-content></v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile class="text-xs-right">
+          <v-list-tile-action>
+            <v-icon>info</v-icon>
+          </v-list-tile-action>
+          <router-link :to="{ name: 'aboutConsenz', params: { prettyLink: documentId } }">
+            אודות קונסנז</router-link>
+          <v-list-tile-content></v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile class="text-xs-right">
+          <v-list-tile-action>
+            <v-icon>description</v-icon>
+          </v-list-tile-action>
+          <router-link
+            :to="{ name: 'aboutDocument', params: { prettyLink: documentId } }">
+            אודות המסמך "{{
+            documentTitle }}"
+          </router-link>
+          <v-list-tile-content></v-list-tile-content>
+        </v-list-tile>
+        <!-- <v-list-tile> -->
+        <!-- <v-list-tile-action>
+                <v-icon>phone</v-icon>
+              </v-list-tile-action>
+              <router-link to="/contactUs"> יצירת קשר</router-link>
+              <v-list-tile-content>
+              </v-list-tile-content> -->
+        </v-list-tile>
+        <v-spacer></v-spacer>
+        <v-divider></v-divider>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-toolbar class="hidden-md-and-up" :clipped-left="toolbar.clippedLeft"
+      :fixed="toolbar.fixed" app dark
+      v-bind:style="{ 'backgroundColor': navBar.color }">
+      <v-layout row align-center justify-center>
+        <v-icon @click="onClickNavBar">
+          {{ navBar.icon }}</v-icon>
+        <v-flex>
+          <v-toolbar-title class="my-headline ma-0">
+            {{ navBar.title }}</v-toolbar-title>
+        </v-flex>
+      </v-layout>
+    </v-toolbar>
+
+    <v-toolbar class="hidden-sm-and-down" clipped-right
+      :clipped-left="toolbar.clippedLeft" :fixed="toolbar.fixed" app dark
+      v-bind:style="{ backgroundColor: navBar.color }">
+      <v-layout row align-center justify-center v-if="!isDesktop(1280)">
+        <v-icon xs6 @click="onClickNavBar">
+          {{ navBar.icon }}</v-icon>
+        <v-flex xs6>
+          <v-toolbar-title class="my-headline ma-0">
+            {{ navBar.title }}</v-toolbar-title>
+        </v-flex>
+      </v-layout>
+      <v-layout v-else row align-center justify-center>
+        <v-icon xs5 @click="onClickNavBar">
+          {{ navBar.icon }}</v-icon>
+        <v-flex xs7>
+          <v-toolbar-title class="my-headline ma-0">
+            {{ navBar.title }}</v-toolbar-title>
+        </v-flex>
+      </v-layout>
+    </v-toolbar>
+    <transition :name="transitionName" mode="out-in">
+      <router-view :key="$route.fullPath"></router-view>
+    </transition>
+  </div>

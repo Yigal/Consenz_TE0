@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.96 20.98">
+    <defs>
+        <style>
+            .cls-1,.cls-3,.cls-5{fill:none;}.cls-2{clip-path:url(#clip-path);}.cls-3,.cls-5{stroke:#69388c;}.cls-3{stroke-linecap:round;stroke-linejoin:round;}.cls-4{clip-path:url(#clip-path-2);}.cls-5{stroke-miterlimit:10;stroke-width:0.5px;}
+        </style>
+        <clipPath id="clip-path">
+            <rect class="cls-1" x="0.06" y="0.06" width="30.67" height="20.66"/>
+        </clipPath>
+        <clipPath id="clip-path-2">
+            <rect class="cls-1" x="0.06" y="0.06" width="31.22" height="20.66"/>
+        </clipPath>
+    </defs>
+    <title>Asset 3</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+            <g class="cls-2">
+                <path class="cls-3"
+                      d="M18.75,3.5a1.67,1.67,0,0,1,.58-1.26L20.81.9A1.67,1.67,0,0,1,21.9.5h1.91A1.62,1.62,0,0,1,24.9.91l1.53,1.33A1.69,1.69,0,0,1,27,3.5V7.18L25.24,9.05v1.66l4.11,2a1.67,1.67,0,0,1,1.11,1.57V19M12.21,3.5a1.67,1.67,0,0,0-.58-1.26L10.14.9A1.64,1.64,0,0,0,9.06.5H7.14A1.64,1.64,0,0,0,6.05.91L4.53,2.24A1.69,1.69,0,0,0,4,3.5V7.18L5.72,9.05v1.66l-4.11,2A1.66,1.66,0,0,0,.5,14.25V19m22.17,1.52V16.23a1.65,1.65,0,0,0-1.1-1.56l-3.83-2V11l1.73-1.87V5.49a1.65,1.65,0,0,0-.58-1.26L17.4,2.89a1.64,1.64,0,0,0-1.08-.4H14.4a1.69,1.69,0,0,0-1.09.4L11.79,4.23a1.66,1.66,0,0,0-.57,1.26V9.17L13,11V12.7l-4.11,2a1.65,1.65,0,0,0-1.11,1.57v4.24"/>
+            </g>
+            <g class="cls-4">
+                <path class="cls-5" d="M11.87,13.07a4.5,4.5,0,0,0,7.24.33"/>
+            </g>
+        </g>
+    </g>
+</svg>

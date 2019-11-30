@@ -1,0 +1,497 @@
+[
+  {
+    "id": "2Crq1RyAEh7FZOaz0sHz",
+    "content": "יש יתרונות רבים למוניות שירות במיוחד בערים גדולות.",
+    "convinced": [
+      "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+    ],
+    "createdAt": "2019-06-23T19:07:02.413Z",
+    "created_at": "2019-06-23T19:07:02.417Z",
+    "created_by": "SGDwmEgkGRUvTsTAX4nRJGw2N182",
+    "documentId": "springfield",
+    "owner": "SGDwmEgkGRUvTsTAX4nRJGw2N182",
+    "sectionId": "HCHpxc7mqXsosNH8Keto",
+    "type": true,
+    "updated_at": "2019-08-23T14:40:15.462Z",
+    "updated_by": "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+  },
+  {
+    "id": "6DhlnDGmo974t8hPSME1",
+    "content": "זה גם מקור לתעסוקה וגם שומר את האנרגיה בסביבה.",
+    "convinced": [
+      "Sj8LmDNurnVjY1fuHRDg0wfUn592"
+    ],
+    "createdAt": "2019-06-11T18:48:16.511Z",
+    "created_at": "2019-06-11T18:48:16.513Z",
+    "created_by": "WoySQvhNkHe559yeQGj6XOhbiY42",
+    "documentId": "springfield",
+    "owner": "WoySQvhNkHe559yeQGj6XOhbiY42",
+    "sectionId": "iZWSwlK0hABWLaYUOcfH",
+    "type": true,
+    "updated_at": "2019-06-19T19:45:26.901Z",
+    "updated_by": "Sj8LmDNurnVjY1fuHRDg0wfUn592"
+  },
+  {
+    "id": "7wrHR5MtJIb50rBUkVOJ",
+    "content": "אנרגיה סולארית היא גם ירוקה וגם משתלמת כלכלית.",
+    "convinced": [
+      "6asqBeoTB3ddQN3PyaNEjOORNgn1"
+    ],
+    "createdAt": "2019-06-11T19:03:37.407Z",
+    "created_at": "2019-06-11T19:03:37.415Z",
+    "created_by": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "documentId": "springfield",
+    "owner": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "sectionId": "Qeiwr5GJTPWoBHBs4Hef",
+    "type": true,
+    "updated_at": "2019-06-11T19:06:21.092Z",
+    "updated_by": "6asqBeoTB3ddQN3PyaNEjOORNgn1"
+  },
+  {
+    "id": "8EYhH7xPOpEd0T2Mves1",
+    "content": "תחנת כח גרעינית זה דבר מסוכן!",
+    "convinced": [
+      "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+      "Sj8LmDNurnVjY1fuHRDg0wfUn592"
+    ],
+    "createdAt": "2019-06-13T13:23:16.338Z",
+    "created_at": "2019-06-13T13:23:16.342Z",
+    "created_by": "qLeqjRakQNNDsNNMXUpJ3NsFkIA3",
+    "documentId": "springfield",
+    "owner": "qLeqjRakQNNDsNNMXUpJ3NsFkIA3",
+    "sectionId": "269KTx7D1eVrbM0gTUM7",
+    "type": false,
+    "updated_at": "2019-06-16T16:30:08.990Z",
+    "updated_by": "Sj8LmDNurnVjY1fuHRDg0wfUn592"
+  },
+  {
+    "id": "9V9Tw1fFR6LPcUporRmg",
+    "content": " על מה אתה מדבר, אין שום אנרגיות רעות בעיר ",
+    "contentHtml": "<p>על מה אתה מדבר, </p><p>אין שום אנרגיות רעות בעיר</p>",
+    "convinced": [],
+    "createdAt": "2019-06-26T16:54:15.070Z",
+    "created_at": "2019-06-26T16:54:15.079Z",
+    "created_by": "SGDwmEgkGRUvTsTAX4nRJGw2N182",
+    "documentId": "springfield",
+    "owner": "SGDwmEgkGRUvTsTAX4nRJGw2N182",
+    "sectionId": "0qjVXMjWzrwUyaX4GHzT"
+  },
+  {
+    "id": "AvLSEZPHjSEdaf0khIPR",
+    "content": "",
+    "convinced": [],
+    "createdAt": "2019-06-16T10:01:02.060Z",
+    "created_at": "2019-06-16T10:01:02.062Z",
+    "created_by": "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+    "documentId": "springfield",
+    "owner": "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+    "sectionId": "269KTx7D1eVrbM0gTUM7"
+  },
+  {
+    "id": "AyPFHHHP396XMaj6xYtK",
+    "content": "סקייטבורד חשמלי הוא כלי תחבורה ירוק. כל סקייטבורד כזה הוא רכב אחד פחות על הכביש.",
+    "convinced": [
+      "GvXumnitoqQBbMxXFLR9iDoi5h73",
+      "auMaCzL1rlNstrnVWG6P8rQui182",
+      "JojSztubqJeD4i0YNfwoxsnJNRB2",
+      "fwbUnvJaPGhKxFy9sPZAYMu578f2",
+      "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+    ],
+    "createdAt": "2019-06-12T08:35:48.896Z",
+    "created_at": "2019-06-12T08:35:48.897Z",
+    "created_by": "6asqBeoTB3ddQN3PyaNEjOORNgn1",
+    "documentId": "springfield",
+    "owner": "6asqBeoTB3ddQN3PyaNEjOORNgn1",
+    "sectionId": "Zhb4FtdI3AetNBmUuzbi",
+    "type": true,
+    "updated_at": "2019-09-08T10:08:43.757Z",
+    "updated_by": "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+  },
+  {
+    "id": "CuG62nQtTzHYXGatlxca",
+    "content": " זה גם אקולוגי, וגם יעודד אותנו להיות חטובים ובריאים. וכולנו רוצים לחיות עם אנשים חטובים ובריאים. חדר כושר גוזל אנרגיה, ולרוץ ברחוב מפריע למי שרוצה לשבת על ספסל. ",
+    "contentHtml": "<p>זה גם אקולוגי, וגם יעודד אותנו להיות חטובים ובריאים. וכולנו רוצים לחיות עם אנשים חטובים ובריאים.</p><p>חדר כושר גוזל אנרגיה, ולרוץ ברחוב מפריע למי שרוצה לשבת על ספסל.</p>",
+    "convinced": [],
+    "createdAt": "2019-07-09T15:16:11.577Z",
+    "created_at": "2019-07-09T15:16:11.578Z",
+    "created_by": "JojSztubqJeD4i0YNfwoxsnJNRB2",
+    "documentId": "springfield",
+    "owner": "JojSztubqJeD4i0YNfwoxsnJNRB2",
+    "sectionId": "ou4gB5hhkblzz4KKM6kV",
+    "type": true,
+    "updated_at": "2019-07-25T09:44:02.311Z",
+    "updated_by": "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+  },
+  {
+    "id": "Eu2U9mcO5L3GsEOJMlOW",
+    "content": "",
+    "convinced": [],
+    "createdAt": "2019-06-13T09:57:41.976Z",
+    "created_at": "2019-06-13T09:57:41.978Z",
+    "created_by": "zoPB6turDIQeOFRLALTKXWAETZo1",
+    "documentId": "springfield",
+    "owner": "zoPB6turDIQeOFRLALTKXWAETZo1",
+    "sectionId": "yIgzSkiq8QHo3zCfFmSB",
+    "type": true,
+    "updated_at": "2019-08-23T14:39:43.912Z",
+    "updated_by": "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+  },
+  {
+    "id": "F0kwWMNX7eCMvKkJqTya",
+    "content": " זה עוד מקור אנרגיה חשוב. ",
+    "contentHtml": "<p>זה עוד מקור אנרגיה חשוב.</p>",
+    "convinced": [],
+    "createdAt": "2019-09-08T10:11:09.505Z",
+    "created_at": "2019-09-08T10:11:09.517Z",
+    "created_by": "SGDwmEgkGRUvTsTAX4nRJGw2N182",
+    "documentId": "springfield",
+    "owner": "SGDwmEgkGRUvTsTAX4nRJGw2N182",
+    "sectionId": "wLl23iX4gZCoQl11JqEV",
+    "type": true
+  },
+  {
+    "id": "Gvb2Jt17cpnXI6hL5Ccw",
+    "content": "אנחנו משנות צבעי שיער מעת לעת. חשוב לא לפגוע בזכויותנו",
+    "convinced": [],
+    "createdAt": "2019-06-13T10:00:46.739Z",
+    "created_at": "2019-06-13T10:00:46.743Z",
+    "created_by": "OPfkNjVRlJe8I6bIisMZCGYTKNh2",
+    "documentId": "springfield",
+    "owner": "OPfkNjVRlJe8I6bIisMZCGYTKNh2",
+    "sectionId": "mwdP0NFFbhDvaPINOfzn",
+    "type": true
+  },
+  {
+    "id": "GxR9gNa1r92sh1N7cWpP",
+    "content": "אני נגד. הבר העירוני הוא מקום התכנסות ומפגש לתושבים ויש לו ערך משמעותי לקהילה.",
+    "convinced": [
+      "BqIvL9oSP1Yi91o2hkSB7qAySiR2",
+      "SVg17ZwpTFMtJE1PGdRfwuRST262"
+    ],
+    "createdAt": "2019-06-13T07:46:53.291Z",
+    "created_at": "2019-06-13T07:46:53.300Z",
+    "created_by": "KciQvYPrkdSn4L4HJgAzI1YLqxX2",
+    "documentId": "springfield",
+    "owner": "KciQvYPrkdSn4L4HJgAzI1YLqxX2",
+    "sectionId": "BnfnRF9chmNaI9DBzNMM",
+    "type": false,
+    "updated_at": "2019-06-17T15:07:39.098Z",
+    "updated_by": "SVg17ZwpTFMtJE1PGdRfwuRST262"
+  },
+  {
+    "id": "Hyl9PVHqr6EkdDnUf1z6",
+    "content": "מה עם פתרון ביניים: חינוך כן, הגבלת הברים לא.",
+    "convinced": [],
+    "createdAt": "2019-06-17T15:08:30.597Z",
+    "created_at": "2019-06-17T15:08:30.601Z",
+    "created_by": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "documentId": "springfield",
+    "owner": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "sectionId": "BnfnRF9chmNaI9DBzNMM"
+  },
+  {
+    "id": "IUJmR2QqTArsigi87gF5",
+    "content": "התחנה כבר קיימת, יהיה משתלם יותר לתקן את מה שצריך לתקן במקום לבנות מחדש.",
+    "convinced": [
+      "QgfQFhPiGhUN0tAHLVNQ5AOF33O2",
+      "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+    ],
+    "createdAt": "2019-06-12T08:22:42.301Z",
+    "created_at": "2019-06-12T08:22:42.304Z",
+    "created_by": "WoySQvhNkHe559yeQGj6XOhbiY42",
+    "documentId": "springfield",
+    "owner": "WoySQvhNkHe559yeQGj6XOhbiY42",
+    "sectionId": "269KTx7D1eVrbM0gTUM7",
+    "type": true,
+    "updated_at": "2019-09-08T10:11:55.510Z",
+    "updated_by": "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+  },
+  {
+    "id": "JCADTcHLlTsKqCD9qelJ",
+    "content": "אלכוהול הוא גורם מסוכן שמערער את יציבות החברה.",
+    "convinced": [
+      "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+    ],
+    "createdAt": "2019-06-13T07:44:28.525Z",
+    "created_at": "2019-06-13T07:44:28.536Z",
+    "created_by": "9H2exw2v5uVK7npDydwllo6cPrj1",
+    "documentId": "springfield",
+    "owner": "9H2exw2v5uVK7npDydwllo6cPrj1",
+    "sectionId": "BnfnRF9chmNaI9DBzNMM",
+    "type": true,
+    "updated_at": "2019-08-12T06:16:55.487Z",
+    "updated_by": "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+  },
+  {
+    "id": "JezdarBpV0WZDNGCaMrJ",
+    "content": "הגיע הזמן לשים סוף לאפליית בעלי השיער הכחול.",
+    "convinced": [
+      "OPfkNjVRlJe8I6bIisMZCGYTKNh2"
+    ],
+    "createdAt": "2019-06-12T08:54:55.027Z",
+    "created_at": "2019-06-12T08:54:55.028Z",
+    "created_by": "yipDm0Vrp6hcIyZjB3CuMMekH8I2",
+    "documentId": "springfield",
+    "owner": "yipDm0Vrp6hcIyZjB3CuMMekH8I2",
+    "sectionId": "mwdP0NFFbhDvaPINOfzn",
+    "type": true,
+    "updated_at": "2019-06-13T09:58:48.698Z",
+    "updated_by": "OPfkNjVRlJe8I6bIisMZCGYTKNh2"
+  },
+  {
+    "id": "LFoFd53uaRa26DE9aiD0",
+    "content": " zz ",
+    "contentHtml": "<p>zz</p>",
+    "convinced": [],
+    "createdAt": "2019-08-20T14:13:25.966Z",
+    "created_at": "2019-08-20T14:13:25.968Z",
+    "created_by": "Pq6Thvlm5hYb8nDiFXtXFYu4u6b2",
+    "documentId": "springfield",
+    "owner": "Pq6Thvlm5hYb8nDiFXtXFYu4u6b2",
+    "sectionId": "gErAFwNUsnlKwD2WOZAX",
+    "type": true
+  },
+  {
+    "id": "Ln5DvD9VYfrfqq9CLOX6",
+    "content": "אבל מה עם שמירת מגוון?",
+    "convinced": [],
+    "createdAt": "2019-06-16T09:58:57.959Z",
+    "created_at": "2019-06-16T09:58:57.962Z",
+    "created_by": "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+    "documentId": "springfield",
+    "owner": "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+    "sectionId": "yIgzSkiq8QHo3zCfFmSB"
+  },
+  {
+    "id": "Qh6AjJTtls2byT6bzEjX",
+    "content": " זה נשמע הצעה טובה ",
+    "contentHtml": "<p>זה נשמע הצעה טובה</p>",
+    "convinced": [],
+    "createdAt": "2019-08-23T10:44:41.701Z",
+    "created_at": "2019-08-23T10:44:41.702Z",
+    "created_by": "YRGtJv9pPdeWPMSEojiZeXTOBp12",
+    "documentId": "springfield",
+    "owner": "YRGtJv9pPdeWPMSEojiZeXTOBp12",
+    "sectionId": "u1KTvSOMo5l20DhcfSun",
+    "type": true
+  },
+  {
+    "id": "VZLTPjq6pSvaFAnzLPe5",
+    "content": "עיר שמשקיעה בתושביה היא עיר שתומכת בתושביה ומקום שטוב לחיות בו.",
+    "convinced": [
+      "WoySQvhNkHe559yeQGj6XOhbiY42"
+    ],
+    "createdAt": "2019-06-11T18:04:26.227Z",
+    "created_at": "2019-06-11T18:04:26.232Z",
+    "created_by": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "documentId": "springfield",
+    "owner": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "sectionId": "gErAFwNUsnlKwD2WOZAX",
+    "type": true,
+    "updated_at": "2019-06-11T18:33:09.204Z",
+    "updated_by": "WoySQvhNkHe559yeQGj6XOhbiY42"
+  },
+  {
+    "id": "WqIDH1yNVW0KkiObfuWI",
+    "content": "בדיקה",
+    "convinced": [],
+    "createdAt": "2019-06-24T20:14:36.521Z",
+    "created_at": "2019-06-24T20:14:36.529Z",
+    "created_by": "h0eQxcNCDNbBnCPykB6glquEp813",
+    "documentId": "springfield",
+    "owner": "h0eQxcNCDNbBnCPykB6glquEp813",
+    "sectionId": "269KTx7D1eVrbM0gTUM7"
+  },
+  {
+    "id": "alhwzOchph4Jgq74toym",
+    "content": "למה צריך גרעין אם יש שמש כל כך טובה? אנרגיה סולארית שולתתתתתתתתת",
+    "convinced": [],
+    "createdAt": "2019-06-17T15:09:31.344Z",
+    "created_at": "2019-06-17T15:09:31.349Z",
+    "created_by": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "documentId": "springfield",
+    "owner": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "sectionId": "iZWSwlK0hABWLaYUOcfH",
+    "type": false
+  },
+  {
+    "id": "cFcxlfwsZVtWCHiiz7xO",
+    "content": "זאת הדרך הנכונה לחסוך בכספי ציבור ולתמוך בכלכלה המקומית.",
+    "convinced": [],
+    "createdAt": "2019-06-12T08:27:39.972Z",
+    "created_at": "2019-06-12T08:27:39.975Z",
+    "created_by": "QgfQFhPiGhUN0tAHLVNQ5AOF33O2",
+    "documentId": "springfield",
+    "owner": "QgfQFhPiGhUN0tAHLVNQ5AOF33O2",
+    "sectionId": "269KTx7D1eVrbM0gTUM7",
+    "type": true
+  },
+  {
+    "id": "dKmMreACvMlV6lmVX6Tk",
+    "content": " asadsasd ",
+    "contentHtml": "<p>asadsasd</p>",
+    "convinced": [
+      "Pq6Thvlm5hYb8nDiFXtXFYu4u6b2"
+    ],
+    "createdAt": "2019-08-20T14:12:37.857Z",
+    "created_at": "2019-08-20T14:12:37.860Z",
+    "created_by": "Pq6Thvlm5hYb8nDiFXtXFYu4u6b2",
+    "documentId": "springfield",
+    "owner": "Pq6Thvlm5hYb8nDiFXtXFYu4u6b2",
+    "sectionId": "dJl6LrXbmquzRTnsLPvy",
+    "type": true,
+    "updated_at": "2019-08-20T14:12:43.182Z",
+    "updated_by": "Pq6Thvlm5hYb8nDiFXtXFYu4u6b2"
+  },
+  {
+    "id": "efMPhOXHHxOy5D9A8emn",
+    "content": "כי יש עוד סוגים של אנרגיות מתחדשות",
+    "convinced": [
+      "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+      "Sj8LmDNurnVjY1fuHRDg0wfUn592",
+      "SGDwmEgkGRUvTsTAX4nRJGw2N182",
+      "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+    ],
+    "createdAt": "2019-06-16T10:03:01.036Z",
+    "created_at": "2019-06-16T10:03:01.037Z",
+    "created_by": "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+    "documentId": "springfield",
+    "owner": "GvlKPc6pdzNxPtDRSFzhaaxNBHs2",
+    "sectionId": "hNpkZoZxu80nWCZDwL9D",
+    "type": true,
+    "updated_at": "2019-08-11T10:59:30.991Z",
+    "updated_by": "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+  },
+  {
+    "id": "ehw75jNVS87QUddTvzZH",
+    "content": "המחיר זה לא השיקול היחידי. חייבים להביא בחשבון גם את איכות הסביבה",
+    "convinced": [],
+    "createdAt": "2019-06-11T18:44:39.234Z",
+    "created_at": "2019-06-11T18:44:39.239Z",
+    "created_by": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "documentId": "springfield",
+    "owner": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "sectionId": "J11Yn1UkNDQcpxtaKyh6",
+    "type": true,
+    "updated_at": "2019-08-23T14:39:16.465Z",
+    "updated_by": "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+  },
+  {
+    "id": "gfnrILeDW9AIEhs15em4",
+    "content": "חשמל הוא מוצר צריכה חיוני. חיסכון בעלויות החשמל יהיו לטובת כולם!",
+    "convinced": [
+      "Fq5weYjUppWLENXDAQVeUiMD0ZK2"
+    ],
+    "createdAt": "2019-06-11T18:34:29.951Z",
+    "created_at": "2019-06-11T18:34:29.954Z",
+    "created_by": "WoySQvhNkHe559yeQGj6XOhbiY42",
+    "documentId": "springfield",
+    "owner": "WoySQvhNkHe559yeQGj6XOhbiY42",
+    "sectionId": "hDWfAU72VKcEaEXNeVFj",
+    "type": true,
+    "updated_at": "2019-08-23T14:39:21.825Z",
+    "updated_by": "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+  },
+  {
+    "id": "hhaLWvlQpcwyLhXj6NhA",
+    "content": "אין מה לעודד סקייטבורדים חשמליים. אלה כלים מסוכנים וכל מי שמשתמשים בהם חסרי אחריות ומסכנים את ציבור הולכי הרגל.",
+    "convinced": [
+      "fwbUnvJaPGhKxFy9sPZAYMu578f2"
+    ],
+    "createdAt": "2019-06-12T08:39:45.767Z",
+    "created_at": "2019-06-12T08:39:45.769Z",
+    "created_by": "iaDhKMTHw7XDDxl1WvfiNdpv3ma2",
+    "documentId": "springfield",
+    "owner": "iaDhKMTHw7XDDxl1WvfiNdpv3ma2",
+    "sectionId": "Zhb4FtdI3AetNBmUuzbi",
+    "type": false,
+    "updated_at": "2019-08-12T10:01:50.081Z",
+    "updated_by": "P0XeEXV0reb7VhUftNesx9GeYju1"
+  },
+  {
+    "id": "oSNBqDNiqMsbRMtK3MFq",
+    "content": "אוטובוס זה הכלי תחבורה הכי יעיל בעיר.",
+    "convinced": [
+      "GvXumnitoqQBbMxXFLR9iDoi5h73",
+      "JOGl1oYVGNX32hCgoCUJ6xFNjBL2",
+      "iaDhKMTHw7XDDxl1WvfiNdpv3ma2"
+    ],
+    "createdAt": "2019-06-12T08:45:24.117Z",
+    "created_at": "2019-06-12T08:45:24.119Z",
+    "created_by": "BqIvL9oSP1Yi91o2hkSB7qAySiR2",
+    "documentId": "springfield",
+    "owner": "BqIvL9oSP1Yi91o2hkSB7qAySiR2",
+    "sectionId": "Jbgq1rU52QlUTH3NrJJn",
+    "type": true,
+    "updated_at": "2019-06-13T17:40:36.073Z",
+    "updated_by": "iaDhKMTHw7XDDxl1WvfiNdpv3ma2"
+  },
+  {
+    "id": "rURMjeLAp5j5Oc2kyu2k",
+    "content": " ככה ",
+    "contentHtml": "<p>ככה</p>",
+    "convinced": [],
+    "createdAt": "2019-08-22T13:51:33.164Z",
+    "created_at": "2019-08-22T13:51:33.168Z",
+    "created_by": "YRGtJv9pPdeWPMSEojiZeXTOBp12",
+    "documentId": "springfield",
+    "owner": "YRGtJv9pPdeWPMSEojiZeXTOBp12",
+    "sectionId": "qBeFWRKzuMCz2gjG5WNC",
+    "type": true
+  },
+  {
+    "id": "tXlid8d9UPpFOfyFtIZZ",
+    "content": "התחנה הגרעינית זיהמה את הנחל ואת הסביבה, יש מקרי תחלואה נוראים בקרב העובדים והיא מהווה מפגע חמור. לא רק שלא צריך לתמוך בה, צריך לסגור אותה בהקדם",
+    "convinced": [
+      "SVg17ZwpTFMtJE1PGdRfwuRST262"
+    ],
+    "createdAt": "2019-06-11T18:51:54.030Z",
+    "created_at": "2019-06-11T18:51:54.040Z",
+    "created_by": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "documentId": "springfield",
+    "owner": "GvXumnitoqQBbMxXFLR9iDoi5h73",
+    "sectionId": "iZWSwlK0hABWLaYUOcfH",
+    "type": false,
+    "updated_at": "2019-06-17T15:08:54.125Z",
+    "updated_by": "SVg17ZwpTFMtJE1PGdRfwuRST262"
+  },
+  {
+    "id": "wyZlggOzCZWOv4zvfA3Z",
+    "content": "עשו שלום, לא מלחמה",
+    "convinced": [],
+    "createdAt": "2019-06-17T15:13:10.967Z",
+    "created_at": "2019-06-17T15:13:10.974Z",
+    "created_by": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "documentId": "springfield",
+    "owner": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "sectionId": "0qjVXMjWzrwUyaX4GHzT",
+    "type": true,
+    "updated_at": "2019-06-26T16:57:28.948Z",
+    "updated_by": "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+  },
+  {
+    "id": "yR5r18YmY5Kx1MoFs8B8",
+    "content": "סקייטבורדים חשמליים הם בלתי בטיחותיים בדיוק כמו קורקינטים חשמליים. מכת מדינה!",
+    "convinced": [],
+    "createdAt": "2019-06-17T15:06:56.720Z",
+    "created_at": "2019-06-17T15:06:56.727Z",
+    "created_by": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "documentId": "springfield",
+    "owner": "SVg17ZwpTFMtJE1PGdRfwuRST262",
+    "sectionId": "Zhb4FtdI3AetNBmUuzbi",
+    "type": false
+  },
+  {
+    "id": "yjYrgSbU2UdziqxPe7t6",
+    "content": " אנרגיה גרעינית היא המקור הפחות מזהם, האמין והבטוח ביותר למרות הדימוי הבעייתי ",
+    "contentHtml": "<p>אנרגיה גרעינית היא המקור הפחות מזהם, האמין והבטוח ביותר למרות הדימוי הבעייתי </p>",
+    "convinced": [],
+    "createdAt": "2019-08-22T11:54:06.493Z",
+    "created_at": "2019-08-22T11:54:06.495Z",
+    "created_by": "rX9Hpb5cKAhy89x0ZWQhkzntCJm2",
+    "documentId": "springfield",
+    "owner": "rX9Hpb5cKAhy89x0ZWQhkzntCJm2",
+    "sectionId": "iZWSwlK0hABWLaYUOcfH",
+    "type": true
+  }
+]

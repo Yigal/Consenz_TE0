@@ -1,0 +1,175 @@
+<!--suppress HtmlRequiredAltAttribute -->
+<div class="draft-page-container">
+  <div class="text-xs-center" v-if="isNewUser && showInfoVideo">
+    <v-dialog v-model="dialog">
+      <v-card class="pa-1">
+        <v-layout fill-height column>
+          <div class="text-xs-left">
+            <v-icon @click="dialog=false">close</v-icon>
+          </div>
+          <div class="iframe pa-1" v-html="infoVideo"></div>
+        </v-layout>
+      </v-card>
+    </v-dialog>
+  </div>
+  <section class="pa-5" v-if="isLoading">
+    <v-progress-circular class="ma-5 progress" :size="70" :width="7"
+      indeterminate></v-progress-circular>
+  </section>
+  <section v-else class="bcm width100">
+    <v-container class="main-container-draft">
+      <v-layout column align-center justify-center mb-5>
+        <v-layout column fill-height d-flex class="bbg width100">
+          <v-layout justify-space-around class="mb-2">
+            <p class="my-headline font-weight-medium cmp mf">
+              {{ documentTitle }}
+            </p>
+          </v-layout>
+          <v-layout class="mb-2 pa-2" justify-space-around align-end>
+            <div @click="voteOnNewSections()">
+              <img src="../../../assets/suggestions.svg" />
+              <p class="mf">{{ inTheVoteSize }} הצעות</p>
+            </div>
+            <div @click="voteOnNewSections()">
+              <img src="../../../assets/comments.svg" />
+              <p class="mf">{{ argumentsSize + commentsSize }} תגובות</p>
+            </div>
+            <div>
+              <img src="../../../assets/participents.svg" />
+              <p class="mf">{{ participantsSize }} משתתפים</p>
+            </div>
+            <div>
+              <img class="background-size" src="../../../assets/version.svg" />
+              <p class="mf">גרסא {{ approvedSize }}</p>
+            </div>
+          </v-layout>
+        </v-layout>
+        <v-layout column fill-height class="width100">
+          <v-flex class="for_keys_container"
+            v-for="topic in Object.keys(sections)">
+            <v-container v-if="documentDivisionOfTopics" class=" border-bottom pr-0 pb-3
+            pt-3">
+              <h2 class="my-title bold cmp text-xs-right mf">
+                {{topic}}
+              </h2>
+            </v-container>
+            <v-container class="pa-0 pt-2">
+              <v-card class="mb-2 pb-2 transparent pointer"
+                v-for="(section, index) in sections[topic]" :key="section.id">
+                <v-layout column>
+                  <v-badge color="white" right class="mf edit_badge">
+                    <template v-slot:badge v-if="section.toEdit.length > 
+                                0">
+                      <span
+                        @click="navigateToSectionPage(index,
+                                enums.FEED_TYPE.toEdit, section)">{{section.toEdit.length}}</span>
+                    </template>
+                    <v-layout justify-space-around row>
+                      <v-flex>
+                        <div @click="navigateToSectionPage(index,
+                        enums.FEED_TYPE.toEdit, section)"
+                          class="pa-2 mt-2 section_content">
+                          <v-layout align-start row>
+                            <span
+                              class="bold cmp mf pl-1">{{section.index}}.</span>
+                            <span v-if="'contentHtml' in section"
+                              class="text-xs-right"
+                              v-html="section.contentHtml"></span>
+                            <span v-else
+                              class="text-xs-right">{{ section.content }}</span>
+                          </v-layout>
+                        </div>
+                      </v-flex>
+                      <v-flex xs1>
+                        <v-layout row align-center justify-end>
+                          <v-menu>
+                            <div slot="activator" class="menu">
+                              <v-btn class="pa-0 ma-0" dark icon>
+                                <v-icon color="purple" style="font-size: 18px;">
+                                  more_vert
+                                </v-icon>
+                              </v-btn>
+                            </div>
+                            <div>
+                              <v-list class="pointer">
+                                <v-list-tile class="bcy" v-if="isSectionHaveStatus(section,
+                                enums.FEED_TYPE.toEdit)">
+                                  <div class="list-title" @click="navigateToSectionPage(index,
+                                  enums.FEED_TYPE.toEdit,
+                                  section)">
+                                    <span>{{section.toEdit.length}}
+                                      הצעות
+                                      לשינוי הסעיף</span>
+                                  </div>
+                                </v-list-tile>
+                                <v-list-tile>
+                                  <div class="list-title" @click="navigateToSectionPage(index,
+                                  enums.FEED_TYPE.edited, section)">
+                                    <span>להיסטוריית הסעיף</span>
+                                  </div>
+                                </v-list-tile>
+                                <v-list-tile v-if="isSectionHaveStatus(section,
+                                enums.FEED_TYPE.toDelete)">
+                                  <div class="list-title" @click="navigateToSectionPage(index,
+                                  enums.FEED_TYPE.toDelete, section)">
+                                    <span>להצבעה על מחיקת הסעיף</span>
+                                  </div>
+                                </v-list-tile>
+                                <v-list-tile v-else>
+                                  <div class="list-title" @click="navigateToAddNewPage(section,
+                                  enums.FEED_TYPE.toDelete, index)">
+                                    <span>לפרסום הצעה למחיקת הסעיף</span>
+                                  </div>
+                                </v-list-tile>
+                                <v-list-tile>
+                                  <div class="list-title" @click="navigateToAddNewPage(section,
+                                  enums.FEED_TYPE.toEdit, index)">
+                                    <span>לפרסום הצעה לשינוי הסעיף</span>
+                                  </div>
+                                </v-list-tile>
+                              </v-list>
+                            </div>
+                          </v-menu>
+                        </v-layout>
+                      </v-flex>
+                    </v-layout>
+                  </v-badge>
+                </v-layout>
+              </v-card>
+            </v-container>
+          </v-flex>
+        </v-layout>
+        <v-layout class="sup-buttons" justify-center align-end
+          v-if="approvedSize > 0 && voteOnDocument">
+          <v-btn @click="addVoteToDocument('pros')" round class="mf bcb cw"
+            v-bind:class="isUserVoted(document, 'pros') ? `user-voted-pros` : ''">
+            בעד המסמך
+          </v-btn>
+          <h4>{{documentPros.length}}</h4>
+          <v-btn @click="addVoteToDocument(
+            'prosConditional')" v-if="documentConditionalSupport" round
+            class="mf bcy cw"
+            v-bind:class="isUserVoted(document, 'prosConditional') ? `user-voted-prosConditional` : ''">
+            תמיכה על תנאי
+          </v-btn>
+          <h4 v-if="documentConditionalSupport">
+            {{documentProsConditional.length}}</h4>
+          <v-btn @click="addVoteToDocument('cons')" round
+            class="mf bcr bcp80 cw"
+            v-bind:class="isUserVoted(document, 'cons') ? `user-voted-cons` : ''">
+            נגד
+          </v-btn>
+          <h4>{{documentCons.length}}</h4>
+        </v-layout>
+        <v-layout column align-center justify-center>
+          <div class="sticky">
+            <v-btn round class="mf my-title bcp80 cw"
+              @click="voteOnNewSections()">
+              להצבעה על סעיפים חדשים >>
+            </v-btn>
+          </div>
+        </v-layout>
+      </v-layout>
+    </v-container>
+  </section>
+</div>

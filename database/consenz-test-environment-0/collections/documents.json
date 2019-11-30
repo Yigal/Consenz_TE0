@@ -1,0 +1,40 @@
+[
+  {
+    "id": "springfield",
+    "about": "מטרת מסמך זה היא להדגים כיצד תושבי העיר הבדיונית ספרינגפילד - בני משפחת סימפסון המפורסמים ושכניהם - משתמשים במערכת קונסנז כדי לערוך את מסמך החזון לעירם. אתם מוזמנים להיכנס, להירשם, להצביע, להגיב ולהוסיף הצעות וכך להתרשם מהאפליקציה ולהתנסות בה באופן ישיר.",
+    "conditionalSupport": false,
+    "cons": [],
+    "consensus_meter": "Default",
+    "consensuses": [
+      1,
+      "Default",
+      "Default",
+      "Default",
+      "Default",
+      "Default"
+    ],
+    "createdAt": "2019-06-11T12:27:44.835Z",
+    "divisionOfTopics": true,
+    "documentTopics": [
+      "מבוא",
+      "אנרגיה",
+      "תחבורה",
+      "בריאות הציבור"
+    ],
+    "editors": [
+      "info@consenz.co.il"
+    ],
+    "pros": [
+      "fwbUnvJaPGhKxFy9sPZAYMu578f2",
+      "SGDwmEgkGRUvTsTAX4nRJGw2N182"
+    ],
+    "prosConditional": [],
+    "sendNotifications": false,
+    "threshold": 22,
+    "timer": 999,
+    "title": "consenz - הדגמת המערכת: חזון התושבים לעיר ספרינגפילד",
+    "updated_at": "2019-09-18T07:31:17.204Z",
+    "updated_by": "ZC3wTDvdBJXctmplBgfu36Q2q0b2",
+    "voteOnDocument": true
+  }
+]

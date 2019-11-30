@@ -1,0 +1,229 @@
+$main-purple-color: #69378e;
+$secondary-purple-color: #9876b0;
+$main-background-color: #ededed;
+$grey-color: #d1d1d1;
+$blue-pro: #0fc3ac;
+$red-con: #ff5252;
+$sunny-yellow: #ecd138;
+
+.pointer {
+  cursor: pointer;
+}
+
+.section-text-container {
+  font-family: Miriam, sans-serif;
+  border-bottom: 2px solid $grey-color;
+}
+
+p {
+  margin: 0px !important;
+}
+
+// main font
+.mf {
+  font-family: Heebo, sans-serif !important;
+}
+
+// secondary font
+.sf {
+  font-family: Miriam, sans-serif !important;
+}
+
+// color main purple
+.cmp {
+  color: $main-purple-color !important;
+}
+
+.cw {
+  color: white !important;
+}
+
+// color secondary purple
+.csp {
+  color: $secondary-purple-color;
+}
+
+.cy {
+  color: #ecd138
+}
+
+.bc-trans {
+  background-color: transparent;
+}
+
+// border gray
+.bbg {
+  border-bottom: 1.5px solid $grey-color !important;
+}
+
+.bbg-1 {
+  border-bottom: 0.5px solid $grey-color !important;
+}
+
+.bbp {
+  border-bottom: 1.5px solid $main-purple-color !important;
+}
+
+.bcp80 {
+  background-color: #8860a6 !important;
+}
+
+//background color main
+.bcm {
+  background-color: $main-background-color !important;
+}
+
+//background color purple
+.bcp {
+  background-color: $main-purple-color !important;
+}
+
+.bcb {
+  background-color: $blue-pro !important;
+}
+
+.bcw {
+  background-color: white !important;
+}
+
+.bcr {
+  background-color: $red-con !important;
+}
+
+.bcy {
+  background-color: #ecd138 !important;
+}
+
+.btr {
+  border-top: 2px solid $red-con !important;
+}
+
+.btb {
+  border-top: 2px solid $blue-pro !important;
+}
+
+.bold {
+  font-weight: 800 !important;
+  // color: $main-purple-color;
+}
+
+.cr {
+  color: $red-con !important;
+}
+
+.cb {
+  color: $blue-pro;
+}
+
+.br {
+  border: 2px solid $red-con;
+}
+
+.bb {
+  border: 2px solid $blue-pro;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.flexed {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.my-headline {
+  font-size: 24px !important;
+  font-weight: 400;
+  line-height: 32px !important;
+}
+
+.my-title {
+  font-size: 20px !important;
+  font-weight: 500;
+  // line-height: 1 !important;
+  // letter-spacing: 0.02em !important;
+  word-wrap: unset;
+}
+
+.my-subheading {
+  font-size: 16px !important;
+  font-weight: 400;
+  // letter-spacing: 0.03em !important;
+}
+
+.my-body-2 {
+  font-weight: 600 !important;
+  line-height: 1rem;
+  font-size: 13px;
+  // letter-spacing: 0.02rem;
+  line-height: 1.5rem;
+}
+
+.mirFont {
+  font-family: Miriam, sans-serif;
+}
+
+/*
+
+.myBody-2 {
+  font-size: 14px !important;
+  font-weight: 500;
+}
+.myBody-1 {
+  font-size: 14px !important;
+  font-weight: 400;
+}
+.myCaption {
+  font-size: 12px !important;
+  font-weight: 400;
+}
+*/
+
+.myDisplay-2 {
+  font-size: 45px !important;
+  font-weight: 400;
+  line-height: 48px !important;
+  letter-spacing: normal !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.myDisplay-1 {
+  font-size: 34px !important;
+  font-weight: 400;
+  line-height: 40px !important;
+  letter-spacing: normal !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.my-body-1 {
+  font-size: 13px;
+}
+
+.v-icon {
+  display: inline-flex !important;
+}
+
+
+.user-voted-cons {
+  background-color: white !important;
+  color: $red-con !important;
+  border: 2px solid $red-con;
+}
+
+.user-voted-pros {
+  background-color: white !important;
+  color: $blue-pro !important;
+  border: 2px solid $blue-pro;
+}
+
+.user-voted-prosConditional {
+  background-color: white !important;
+  color: $sunny-yellow !important;
+  border: 2px solid $sunny-yellow;
+}

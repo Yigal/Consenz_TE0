@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.44 21.29">
+    <defs>
+        <style>
+            .cls-1,.cls-3,.cls-5{fill:none;}.cls-2{clip-path:url(#clip-path);}.cls-3,.cls-5{stroke:#69388c;stroke-linecap:round;stroke-linejoin:round;}.cls-4{fill:#ededed;}.cls-5{stroke-width:0.5px;}
+        </style>
+        <clipPath id="clip-path">
+            <rect class="cls-1" x="0.06" y="0.06" width="23.28" height="20.89"/>
+        </clipPath>
+    </defs>
+    <title>Asset 2</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+            <g class="cls-2">
+                <polygon class="cls-3"
+                         points="0.5 4.88 0.5 17.08 3.12 17.08 3.11 20.79 7.14 17.08 15.31 17.08 15.31 4.88 0.5 4.88"/>
+            </g>
+            <polygon class="cls-4"
+                     points="22.94 0.5 22.94 12.7 20.32 12.7 20.32 16.4 16.29 12.7 8.13 12.7 8.13 0.5 22.94 0.5"/>
+            <g class="cls-2">
+                <polygon class="cls-3"
+                         points="22.94 0.5 22.94 12.7 20.32 12.7 20.32 16.4 16.29 12.7 8.13 12.7 8.13 0.5 22.94 0.5"/>
+            </g>
+            <path class="cls-5" d="M11,8.51h9.15M11,6.83h9.15M11,5.15h9.15"/>
+        </g>
+    </g>
+</svg>
