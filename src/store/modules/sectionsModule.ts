@@ -101,7 +101,7 @@ export const sectionsModule = {
     isParentSection: (state, getters) => (sectionId) => sectionId === state.initialParentId || getters['sectionById'](sectionId)[0].status === enums.SECTION_STATUS.approved,
     getDeadline: (state) => (deadline) => {
       let time = deadline;
-      if ('seconds' in deadline) { time = new Date(time.seconds * 1000); } // Epoch
+      if (time.getSeconds()) { time = new Date(time.getSeconds() * 1000); } // Epoch
       const countDownDate = new Date(time).getTime();
       return countDownDate - new Date().getTime();
     },
@@ -112,8 +112,15 @@ export const sectionsModule = {
     loadMockData: (state, payload) => {
       let mockData = require(`../../../database/${mockDbName}/collections/sections.json`)
       const dataObject = {}
-      mockData = mockData.filter(d => d.documentId === payload).forEach(d => Object.assign(dataObject, {[d.id]: d}))
+      mockData = mockData.filter(d => d.documentId === payload)
+      .map(d => Object.assign({...d}, {
+        createdAt: new Date(d.createdAt),
+        acceptedAt: new Date (d.acceptedAt),
+        deadline: new Date (d.deadline),
+      }))
+      .forEach(d => Object.assign(dataObject, {[d.id]: d}))
       Vue.set(state, "data", dataObject);
+    
     },
     setToSectionById: (state, { id, payload }) => {
       Object.keys(state.data).forEach((key, index) => {

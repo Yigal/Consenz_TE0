@@ -155,7 +155,9 @@ export const mainModule = {
       }
 
     },
-    initStoreWithMochData: ({state, commit}) => {
+    initStoreWithMochData: ({state, commit}) => {      
+      commit('documentsModule/setPrettyLink', state.prettyLink, { root: true });
+
       commit('loadMockData', 'v1' )
       commit('documentsModule/loadMockData', state.prettyLink, { root: true } )
       commit('sectionsModule/loadMockData', state.prettyLink, { root: true } )
@@ -163,6 +165,11 @@ export const mainModule = {
       commit('commentsModule/loadMockData', state.prettyLink, { root: true } )
       commit('usersModule/loadMockData', state.prettyLink, { root: true } )
 
+
+      commit('setLoading', false);
+      const payload = { currentRoute: router.currentRoute };
+      console.log('mainModule.ts Commit setToState ' + payload);
+      commit('routerModule/setToState', payload, { root: true });
 
       // await commit('documentsModule/fetchById', state.prettyLink, { root: true });
       // console.log('mainModule.ts Dispatch sectionsModule/openDBChannel');
