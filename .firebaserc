@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "consenz-test-environment-0"
+    "default": "consenz-test-environment-0",
+    "staging": "consenz-test-environment-0",
+    "production": "consenz-test-environment-0"
   }
 }
