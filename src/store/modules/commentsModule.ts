@@ -2,6 +2,7 @@ import { CommentInterface } from '@/types/interfaces';
 import Vue from 'vue';
 import * as enums from '@/types/enums';
 import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
+import { mockDbName } from '..';
 
 export const commentsModule = {
   firestorePath: 'comments',
@@ -94,6 +95,12 @@ export const commentsModule = {
         .sort((commentA: CommentInterface, commentB: CommentInterface) => commentA.createdAt.getTime() - commentB.createdAt.getTime()),
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/sections.json`)
+      const dataObject = {}
+      mockData = mockData.filter(d => d.documentId === payload).forEach(d => Object.assign(dataObject, {[d.id]: d}))
+      Vue.set(state, "data", dataObject);
+    },
     setCommentsSize: (state, size) => {
       Vue.set(state, 'argumentsSize', size);
     },

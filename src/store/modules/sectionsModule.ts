@@ -4,6 +4,7 @@ import * as constants from '@/types/constants';
 import { Promise } from 'bluebird';
 import Vue from 'vue';
 import { keys } from 'ts-transformer-keys';
+import { mockDbName } from '../index';
 
 export const sectionsModule = {
   firestorePath: 'sections',
@@ -85,7 +86,8 @@ export const sectionsModule = {
           .map((id) => data[id])
           .filter((section) => section !== undefined)
           .concat(sectionsArray)
-          .sort((sectionA: SectionInterface, sectionB: SectionInterface) => (status === enums.SECTION_STATUS.edited ? sectionB.acceptedAt!.getTime() - sectionA.acceptedAt!.getTime() : status === enums.SECTION_STATUS.approved ? sectionA.createdAt.getTime() - sectionB.createdAt.getTime() : sectionB.createdAt.getTime() - sectionA.createdAt.getTime()));
+          .sort((sectionA: SectionInterface, sectionB: SectionInterface) => 
+          (status === enums.SECTION_STATUS.edited ? new Date (sectionB.acceptedAt!).getTime() - new Date (sectionA.acceptedAt!).getTime() : status === enums.SECTION_STATUS.approved ? new Date (sectionA.createdAt).getTime() - new Date (sectionB.createdAt).getTime() : new Date (sectionB.createdAt).getTime() - new Date(sectionA.createdAt).getTime()));
       }
     },
     sectionById: (state) => (id) => [state.data[id]],
@@ -107,6 +109,12 @@ export const sectionsModule = {
     isReachedDeadline: (state, getters) => (deadline) => getters.getDeadline(deadline) < 0,
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/sections.json`)
+      const dataObject = {}
+      mockData = mockData.filter(d => d.documentId === payload).forEach(d => Object.assign(dataObject, {[d.id]: d}))
+      Vue.set(state, "data", dataObject);
+    },
     setToSectionById: (state, { id, payload }) => {
       Object.keys(state.data).forEach((key, index) => {
         if (key === id) {

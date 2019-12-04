@@ -2,6 +2,7 @@ import { ArgumentInterface } from '@/types/interfaces';
 import Vue from 'vue';
 import * as enums from '@/types/enums';
 import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
+import { mockDbName } from '..';
 
 export const argumentsModule = {
   firestorePath: 'arguments',
@@ -94,6 +95,12 @@ export const argumentsModule = {
     argumentById: (state) => (argumentId) => state.data[argumentId],
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/sections.json`)
+      const dataObject = {}
+      mockData = mockData.filter(d => d.documentId === payload).forEach(d => Object.assign(dataObject, {[d.id]: d}))
+      Vue.set(state, "data", dataObject);
+    },
     setIsDbChannelIsOpen: (state) => {
       Vue.set(state, 'isDbChannelIsOpen', true);
     },

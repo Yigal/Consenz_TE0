@@ -15,6 +15,7 @@ import { usersModule } from './modules/usersModule';
 import { votingModule } from './modules/votingModule';
 
 Vue.use(Vuex);
+export const mockDbName = 'consenz-test-environment-0'
 
 const easyFirestore = vuexEasyFirestore([sectionsModule, argumentsModule, mainModule, usersModule, commentsModule, documentsModule], {
   logging: process.env.NODE_ENV !== 'production',

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import * as enums from '@/types/enums';
 import { MiniUserInterface } from '@/types/interfaces';
+import { mockDbName } from '..';
 export const usersModule = {
   firestorePath: 'users',
   // The path to a "collection" or single "document" in firestore.
@@ -105,6 +106,11 @@ export const usersModule = {
     isUserEditor: (state) => state.currentUser.role === enums.ROLE.editor,
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/users.json`)
+      mockData = mockData.filter(user => user.documents.includes(payload))
+      Vue.set(state, "data", mockData);
+    },
     setUid: (state, uid) => {
       Vue.set(state.currentUser, 'uid', uid);
     },

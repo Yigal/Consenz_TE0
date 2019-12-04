@@ -1,7 +1,7 @@
 import { DocumentInterface } from './../../types/interfaces';
 import { ArgumentInterface } from '@/types/interfaces';
 import Vue from 'vue';
-import * as enums from '@/types/enums';
+import {mockDbName} from '../index'
 import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
 
 export const documentsModule = {
@@ -202,6 +202,11 @@ export const documentsModule = {
     },
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/documents.json`)
+      mockData = mockData.filter(d => d.id === payload)[0]
+      Vue.set(state.data, state.prettyLink, mockData);
+    },
     setPrettyLink: (state, payload) => {
       console.log('Set PrettyLink ' + JSON.stringify(payload));
       Vue.set(state, 'prettyLink', payload);
