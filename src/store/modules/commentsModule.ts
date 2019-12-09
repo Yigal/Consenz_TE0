@@ -3,6 +3,7 @@ import Vue from 'vue';
 import * as enums from '@/types/enums';
 import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
 import { mockDbName } from '..';
+import uniqid from 'uniqid';
 
 export const commentsModule = {
   firestorePath: 'comments',
@@ -125,8 +126,8 @@ export const commentsModule = {
      * @param sectionId
      * @param argumentId
      */
-    addComment: async ({ context, rootGetters, dispatch, commit }, { content, contentHtml, sectionId, argumentId }: { content: string; contentHtml: string; sectionId: string; argumentId: string }) => {
-      const newComment: CommentInterface = {
+    addComment: async ({ state, rootGetters, dispatch, commit }, { content, contentHtml, sectionId, argumentId }: { content: string; contentHtml: string; sectionId: string; argumentId: string }) => {
+      let newComment: CommentInterface = {
         content,
         contentHtml,
         documentId: rootGetters['documentsModule/documentId'],
@@ -135,7 +136,14 @@ export const commentsModule = {
         sectionId,
         argumentId,
       };
-      return await dispatch('insert', newComment);
+      let commentId;
+      if (process.env.NODE_ENV === 'development') { 
+        commentId = uniqid();
+        newComment = {...newComment, id: commentId}
+        Vue.set(state.data, commentId, newComment);
+      } else
+       await dispatch('insert', newComment);
+    } 
     },
   },
 };

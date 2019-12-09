@@ -3,6 +3,7 @@ import Vue from "vue";
 import * as enums from "@/types/enums";
 import { arrayUnion, arrayRemove } from "vuex-easy-firestore";
 import { mockDbName } from "..";
+import uniqid from 'uniqid';
 
 export const argumentsModule = {
   firestorePath: "arguments",
@@ -139,7 +140,7 @@ export const argumentsModule = {
      * @param type
      */
     addArgument: async (
-      { context, rootGetters, dispatch, commit },
+      { state, rootGetters, dispatch, commit },
       {
         content,
         contentHtml,
@@ -152,7 +153,7 @@ export const argumentsModule = {
         type: boolean;
       }
     ) => {
-      const newArgument: ArgumentInterface = {
+      let newArgument: ArgumentInterface = {
         content,
         contentHtml,
         documentId: rootGetters["documentsModule/documentId"],
@@ -165,7 +166,12 @@ export const argumentsModule = {
         newArgument.type = type;
       }
       console.log("Dispatch insert newArgument " + JSON.stringify(newArgument));
-      const argId = await dispatch("insert", newArgument);
+      let argId;
+      if (process.env.NODE_ENV === 'development') { 
+        argId = uniqid();
+        newArgument = {...newArgument, id: argId}
+        Vue.set(state.data, argId, newArgument);
+      } else await dispatch("insert", newArgument);
       const isSectionReachedToThreshold = await dispatch(
         "voteAfterAddingArgument",
         { sectionId, type }
@@ -178,8 +184,22 @@ export const argumentsModule = {
      * @param {string} id the id of the section
      * @param {object} updateObject object with the keys and values to update
      */
-    updateArgument: async ({ dispatch }, { id, updateObject }) => {
+    updateArgument: async ({ dispatch , state}, { id, updateObject }) => {
+      if (process.env.NODE_ENV === 'development') {
+        console.log("updateArgument", updateObject, state.data[id])
+        let updatedArgument = state.data.filter(arg => arg.id === id)[0]
+        Object.keys(updateObject).forEach((key) => {
+          updatedArgument = Object.assign(state.data[id], {
+            [key]: updateObject[key]
+          })
+        })
+        console.log("updatedSection:", updatedArgument)
+        Vue.set(state, "data", 
+          [...state.data.filter(element => element.id !== id),
+          updatedArgument])
+      } else {
       dispatch("patch", { id, ...updateObject });
+      }
     },
 
     voteAfterAddingArgument: async (
