@@ -3,6 +3,7 @@ import * as enums from '@/types/enums';
 import * as constants from '@/types/constants';
 import { Promise } from 'bluebird';
 import Vue from 'vue';
+import uniqid from 'uniqid';
 import { keys } from 'ts-transformer-keys';
 import { mockDbName } from '../index';
 
@@ -112,7 +113,6 @@ export const sectionsModule = {
     loadMockData: (state, payload) => {
       let mockData = require(`../../../database/${mockDbName}/collections/sections.json`)
       const dataObject = {}
-      console.log(mockData)
       const newArray = mockData.filter(d => d.documentId === payload)
         .map(d => Object.assign({ ...d }, {
           createdAt: new Date(d.createdAt),
@@ -205,7 +205,7 @@ export const sectionsModule = {
       console.log('Dispatch insert newSection ' + JSON.stringify(newSection));
       let newSectionId;
       if (process.env.NODE_ENV === 'development') { 
-        newSectionId = 'ewijrt43'
+        newSectionId = uniqid();
         newSection = {...newSection, id: newSectionId}
         Vue.set(state.data, newSectionId, newSection);
       }
