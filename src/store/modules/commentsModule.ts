@@ -143,7 +143,8 @@ export const commentsModule = {
         Vue.set(state.data, commentId, newComment);
       } else
        await dispatch('insert', newComment);
-    } 
+    
+   
     },
   },
 };
