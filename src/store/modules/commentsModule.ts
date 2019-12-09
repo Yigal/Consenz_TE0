@@ -96,9 +96,19 @@ export const commentsModule = {
   },
   mutations: {
     loadMockData: (state, payload) => {
-      let mockData = require(`../../../database/${mockDbName}/collections/sections.json`)
+      let mockData = require(`../../../database/${mockDbName}/collections/comments.json`)
       const dataObject = {}
-      mockData = mockData.filter(d => d.documentId === payload).forEach(d => Object.assign(dataObject, {[d.id]: d}))
+      mockData = mockData
+        .filter(d => d.documentId === payload)
+        .map(d =>
+          Object.assign(
+            { ...d },
+            {
+              createdAt: new Date(d.createdAt)
+            }
+          )
+        )
+        .forEach(d => Object.assign(dataObject, { [d.id]: d }))
       Vue.set(state, "data", dataObject);
     },
     setCommentsSize: (state, size) => {
