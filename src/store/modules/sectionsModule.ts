@@ -86,8 +86,8 @@ export const sectionsModule = {
           .map((id) => data[id])
           .filter((section) => section !== undefined)
           .concat(sectionsArray)
-          .sort((sectionA: SectionInterface, sectionB: SectionInterface) => 
-          (status === enums.SECTION_STATUS.edited ? new Date (sectionB.acceptedAt!).getTime() - new Date (sectionA.acceptedAt!).getTime() : status === enums.SECTION_STATUS.approved ? new Date (sectionA.createdAt).getTime() - new Date (sectionB.createdAt).getTime() : new Date (sectionB.createdAt).getTime() - new Date(sectionA.createdAt).getTime()));
+          .sort((sectionA: SectionInterface, sectionB: SectionInterface) =>
+            (status === enums.SECTION_STATUS.edited ? new Date(sectionB.acceptedAt!).getTime() - new Date(sectionA.acceptedAt!).getTime() : status === enums.SECTION_STATUS.approved ? new Date(sectionA.createdAt).getTime() - new Date(sectionB.createdAt).getTime() : new Date(sectionB.createdAt).getTime() - new Date(sectionA.createdAt).getTime()));
       }
     },
     sectionById: (state) => (id) => [state.data[id]],
@@ -112,15 +112,16 @@ export const sectionsModule = {
     loadMockData: (state, payload) => {
       let mockData = require(`../../../database/${mockDbName}/collections/sections.json`)
       const dataObject = {}
-      mockData = mockData.filter(d => d.documentId === payload)
-      .map(d => Object.assign({...d}, {
-        createdAt: new Date(d.createdAt),
-        acceptedAt: new Date (d.acceptedAt),
-        deadline: new Date (d.deadline),
-      }))
-      .forEach(d => Object.assign(dataObject, {[d.id]: d}))
+      console.log(mockData)
+      const newArray = mockData.filter(d => d.documentId === payload)
+        .map(d => Object.assign({ ...d }, {
+          createdAt: new Date(d.createdAt),
+          acceptedAt: d.acceptedAt ? new Date(d.acceptedAt): null,
+          deadline: new Date(d.deadline),
+        }))
+        .forEach(d => Object.assign(dataObject, { [d.id]: d }))
       Vue.set(state, "data", dataObject);
-    
+
     },
     setToSectionById: (state, { id, payload }) => {
       Object.keys(state.data).forEach((key, index) => {
@@ -176,18 +177,18 @@ export const sectionsModule = {
      * adding section
      * @param payload
      */
-    addSection: async ({ rootGetters, dispatch }, payload) => {
+    addSection: async ({ rootGetters, dispatch, state }, payload) => {
       console.log('sectionsModule.addSection() Add Section ' + JSON.stringify(payload));
       const deadline = new Date();
       let timer = rootGetters['documentsModule/documentTimer'];
-      if (timer == null){
+      if (timer == null) {
         timer = 1000;
       }
       const hours = deadline.getHours() + timer;
       deadline.setHours(hours);
       let documentId = rootGetters['documentsModule/documentId'];
       const userUid = rootGetters['usersModule/userUid'];
-      const newSection = {
+      let newSection = {
         ...payload,
         cons: [],
         createdAt: new Date(),
@@ -198,12 +199,18 @@ export const sectionsModule = {
         timer: timer,
       };
       const documentThreshold = rootGetters['documentsModule/documentThreshold'];
-      if (documentThreshold){
+      if (documentThreshold) {
         newSection.threshold = documentThreshold;
       }
       console.log('Dispatch insert newSection ' + JSON.stringify(newSection));
-      const newSectionId = await dispatch('insert', newSection);
-      const update = {id: newSectionId, updateObject: { id: newSectionId }};
+      let newSectionId;
+      if (process.env.NODE_ENV === 'development') { 
+        newSectionId = 'ewijrt43'
+        newSection = {...newSection, id: newSectionId}
+        Vue.set(state.data, newSectionId, newSection);
+      }
+      else newSectionId = await dispatch('insert', newSection);
+      const update = { id: newSectionId, updateObject: { id: newSectionId } };
       console.log('Dispatch updateSection update ' + JSON.stringify(update));
       await dispatch('updateSection', update);
       console.log('Return newSectionId ' + JSON.stringify(newSectionId));
@@ -214,8 +221,21 @@ export const sectionsModule = {
      * @param {string} id the id of the section
      * @param {object} updateObject the keys and values to update
      */
-    updateSection: async ({ dispatch }, { id, updateObject }) => {
-      dispatch('patch', { id, ...updateObject });
+    updateSection: async ({ dispatch, state }, { id, updateObject }) => {
+      if (process.env.NODE_ENV === 'development') {
+        console.log("updateSection", updateObject, state.data[id])
+        let updatedSection = state.data[id]
+        Object.keys(updateObject).forEach((key) => {
+          updatedSection = Object.assign(state.data[id], {
+            [key]: updateObject[key]
+          })
+        })
+        console.log("updatedSection:", updatedSection)
+        Vue.set(state.data, id, updatedSection)
+        console.log(state.data[id])
+      } else {
+        dispatch('patch', { id, ...updateObject });
+      }
     },
     /**
      * updates the parent section of the section
@@ -262,8 +282,8 @@ export const sectionsModule = {
           ...(await dispatch('replaceProperties', { sectionId, parentSectionId })),
         };
       }
-      console.log('updating the parent section -> it gets the created and accepted of the EDITED section:', parentSectionId , {...updateObject});
-      if (acceptedByEditor !== null) { updateObject = {...updateObject, acceptedByEditor}; }
+      console.log('updating the parent section -> it gets the created and accepted of the EDITED section:', parentSectionId, { ...updateObject });
+      if (acceptedByEditor !== null) { updateObject = { ...updateObject, acceptedByEditor }; }
       await dispatch('updateSection', {
         id: parentSectionId,
         updateObject: { ...updateObject },
@@ -289,7 +309,7 @@ export const sectionsModule = {
      * @param {string} sectionId the section id
      * */
     replaceProperties: async ({ getters, dispatch }, { sectionId, parentSectionId }) => {
-      const keys = ['content', 'contentHtml', 'owner', 'cons', 'pros', 'threshold', 'timer', 'deadline' , 'acceptedByEditor'];
+      const keys = ['content', 'contentHtml', 'owner', 'cons', 'pros', 'threshold', 'timer', 'deadline', 'acceptedByEditor'];
       const newSection = getters['sectionById'](sectionId)[0];
       const parentSection = getters['sectionById'](parentSectionId)[0];
       let updateApprovedSection = {};
@@ -307,10 +327,10 @@ export const sectionsModule = {
         };
       });
       console.log('updating the section:', sectionId, {
-          ...updateEditedSection,
-          acceptedAt: parentSection.acceptedAt,
-          createdAt: parentSection.createdAt,
-        });
+        ...updateEditedSection,
+        acceptedAt: parentSection.acceptedAt,
+        createdAt: parentSection.createdAt,
+      });
       await dispatch('updateSection', {
         id: sectionId,
         updateObject: {
