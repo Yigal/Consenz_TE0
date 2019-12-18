@@ -17,10 +17,10 @@ Vue.use(Vuex);
 export const mockDbName = "consenz-test-environment-0";
 export let fetchByEnv = "fetchToMockData";
 export let petchByEnv = "petchToMockData";
-export let insertByEnv = "insertToMockData";
+export let insertByEnv = "insertToMockData";  
 
 let easyFirestore;
-let modules = {
+let modules: any = {
   routerModule,
   displayModule,
   notificationsModule,
