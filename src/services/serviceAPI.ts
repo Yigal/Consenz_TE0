@@ -1,7 +1,12 @@
-import { config } from '@/config';
 import axios from 'axios';
 
-const databaseURL = config.firebaseConfig[process.env.NODE_ENV!].cloudFuctions;
+let databaseURL = '';
+if (process.env.NODE_ENV !== "development") {
+  const config = require('@/config')
+  databaseURL = config.firebaseConfig[process.env.NODE_ENV!].cloudFuctions;
+  
+}
+  
 export default {
   async getUser(uid) {
     try {

@@ -112,7 +112,7 @@ export const mainModule = {
     initStore: async ({ state, dispatch, commit, rootGetters }) => {
 
       // check this: in democXrasee project, this code block does not exist
-      const firestore = firebase.firestore();
+      // const firestore = firebase.firestore();
 
       if (process.env.NODE_ENV === 'development') {
         console.log('developing')

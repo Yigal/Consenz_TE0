@@ -77,6 +77,7 @@ export const documentsModule = {
   // You can also add custom state/getters/mutations/actions. These will be added to your module.
   state: {
     prettyLink: undefined,
+    data: {}
   },
   getters: {
     state: (state) => state,

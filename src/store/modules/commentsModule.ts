@@ -2,7 +2,7 @@ import { CommentInterface } from '@/types/interfaces';
 import Vue from 'vue';
 import * as enums from '@/types/enums';
 import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
-import { mockDbName } from '..';
+import { mockDbName, insertByEnv, petchByEnv } from '../index';
 import uniqid from 'uniqid';
 
 export const commentsModule = {
@@ -136,15 +136,12 @@ export const commentsModule = {
         sectionId,
         argumentId,
       };
-      let commentId;
-      if (process.env.NODE_ENV === 'development') { 
-        commentId = uniqid();
+      return await dispatch('insert', newComment);
+    },
+    insertToMockData: ({state}, newComment) => {
+        let commentId = uniqid();
         newComment = {...newComment, id: commentId}
         Vue.set(state.data, commentId, newComment);
-      } else
-       await dispatch('insert', newComment);
-    
-   
     },
   },
 };

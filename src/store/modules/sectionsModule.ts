@@ -5,7 +5,7 @@ import { Promise } from 'bluebird';
 import Vue from 'vue';
 import uniqid from 'uniqid';
 import { keys } from 'ts-transformer-keys';
-import { mockDbName } from '../index';
+import { mockDbName, insertByEnv, petchByEnv } from '../index';
 
 export const sectionsModule = {
   firestorePath: 'sections',
@@ -203,18 +203,17 @@ export const sectionsModule = {
         newSection.threshold = documentThreshold;
       }
       console.log('Dispatch insert newSection ' + JSON.stringify(newSection));
-      let newSectionId;
-      if (process.env.NODE_ENV === 'development') { 
-        newSectionId = uniqid();
-        newSection = {...newSection, id: newSectionId}
-        Vue.set(state.data, newSectionId, newSection);
-      }
-      else newSectionId = await dispatch('insert', newSection);
+      let newSectionId = await dispatch(insertByEnv, newSection);
       const update = { id: newSectionId, updateObject: { id: newSectionId } };
       console.log('Dispatch updateSection update ' + JSON.stringify(update));
       await dispatch('updateSection', update);
       console.log('Return newSectionId ' + JSON.stringify(newSectionId));
       return newSectionId;
+    },
+    insertToMockData: ({state}, newSection) => {
+      let newSectionId = uniqid();
+      newSection = {...newSection, id: newSectionId}
+      Vue.set(state.data, newSectionId, newSection);
     },
     /**
      * updates the section
@@ -222,20 +221,20 @@ export const sectionsModule = {
      * @param {object} updateObject the keys and values to update
      */
     updateSection: async ({ dispatch, state }, { id, updateObject }) => {
-      if (process.env.NODE_ENV === 'development') {
-        console.log("updateSection", updateObject, state.data[id])
-        let updatedSection = state.data[id]
-        Object.keys(updateObject).forEach((key) => {
-          updatedSection = Object.assign(state.data[id], {
-            [key]: updateObject[key]
-          })
+        dispatch(petchByEnv, { id, updateObject });
+    },
+
+    petchToMockData: ({state}, { id, updateObject }) => {
+      console.log("updateSection", updateObject, state.data[id])
+      let updatedSection = state.data[id]
+      Object.keys(updateObject).forEach((key) => {
+        updatedSection = Object.assign(state.data[id], {
+          [key]: updateObject[key]
         })
-        console.log("updatedSection:", updatedSection)
-        Vue.set(state.data, id, updatedSection)
-        console.log(state.data[id])
-      } else {
-        dispatch('patch', { id, ...updateObject });
-      }
+      })
+      console.log("updatedSection:", updatedSection)
+      Vue.set(state.data, id, updatedSection)
+      console.log(state.data[id])
     },
     /**
      * updates the parent section of the section
