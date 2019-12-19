@@ -166,7 +166,7 @@ export const argumentsModule = {
         newArgument.type = type;
       }
       console.log("Dispatch insert newArgument " + JSON.stringify(newArgument));
-      const argId = await dispatch("insert", newArgument);
+      const argId = await dispatch(insertByEnv, newArgument);
       const isSectionReachedToThreshold = await dispatch(
         "voteAfterAddingArgument",
         { sectionId, type }
@@ -178,6 +178,7 @@ export const argumentsModule = {
       const argId = uniqid();
       newArgument = {...newArgument, id: argId}
       Vue.set(state.data, argId, newArgument);
+      return argId;
     },
     /**
      * update the section
