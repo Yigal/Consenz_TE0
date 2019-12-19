@@ -166,7 +166,7 @@ export const argumentsModule = {
         newArgument.type = type;
       }
       console.log("Dispatch insert newArgument " + JSON.stringify(newArgument));
-      const argId = await dispatch("insert", newArgument);
+      const argId = await dispatch(insertByEnv, newArgument);
       const isSectionReachedToThreshold = await dispatch(
         "voteAfterAddingArgument",
         { sectionId, type }
@@ -178,6 +178,7 @@ export const argumentsModule = {
       const argId = uniqid();
       newArgument = {...newArgument, id: argId}
       Vue.set(state.data, argId, newArgument);
+      return argId;
     },
     /**
      * update the section
@@ -191,7 +192,7 @@ export const argumentsModule = {
 
     petchToMockData: ({state}, { id, updateObject }) => {
       console.log("updateArgument", updateObject, state.data[id])
-      let updatedArgument = state.data.filter(arg => arg.id === id)[0]
+      let updatedArgument = state.data[id]
       Object.keys(updateObject).forEach((key) => {
         updatedArgument = Object.assign(state.data[id], {
           [key]: updateObject[key]
@@ -251,17 +252,22 @@ export const argumentsModule = {
      * adds user the convinced array of the argument
      * @param {string} id argument id
      */
-    userConvinced: async ({ dispatch, rootGetters }, id) => {
+    userConvinced: async ({ dispatch, rootGetters, state }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
-      return await dispatch("patch", { id, convinced: [ownerUid]/*arrayUnion(ownerUid)*/ });
+      return process.env.NODE_ENV !== "development"
+        ? await dispatch("patch", { id, convinced: [ownerUid]/*arrayUnion(ownerUid)*/ })
+        : state.data[id].convinced.push(ownerUid);
     },
     /**
      * deleted user the convinced array of the argument
      * @param {string} id argument id
      */
-    userUnconvinced: async ({ dispatch, rootGetters }, id) => {
+    userUnconvinced: async ({ dispatch, rootGetters, state }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
-      return await dispatch("patch", { id, convinced: [ownerUid]/*arrayRemove(ownerUid)*/ });
+      const filtered = state.data[id].convinced.filter(uid => uid !== ownerUid)
+      return process.env.NODE_ENV !== "development"
+      ? await dispatch("patch", { id, convinced: [ownerUid]/*arrayRemove(ownerUid)*/ })
+      : Vue.set(state.data[id], "convinced", filtered);
     },
     /**
      * updating the arguments sectionsId after voting ends

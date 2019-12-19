@@ -136,12 +136,13 @@ export const commentsModule = {
         sectionId,
         argumentId,
       };
-      return await dispatch('insert', newComment);
+      return await dispatch(insertByEnv, newComment);
     },
     insertToMockData: ({state}, newComment) => {
         let commentId = uniqid();
         newComment = {...newComment, id: commentId}
         Vue.set(state.data, commentId, newComment);
+        return commentId;
     },
   },
 };

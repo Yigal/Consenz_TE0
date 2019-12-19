@@ -108,8 +108,10 @@ export const usersModule = {
   mutations: {
     loadMockData: (state, payload) => {
       let mockData = require(`../../../database/${mockDbName}/collections/users.json`)
-      mockData = mockData.filter(user => user.documents.includes(payload))
-      Vue.set(state, "data", mockData);
+      const dataObject = {}
+      mockData = mockData.filter(user => user.documents.includes(payload))        
+      .forEach(d => Object.assign(dataObject, { [d.id]: d }))
+      Vue.set(state, "data", dataObject);
     },
     setUid: (state, uid) => {
       Vue.set(state.currentUser, 'uid', uid);
