@@ -1,6 +1,6 @@
 /*import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import { firestore } from "../init";*/
+import { fire$$store } from "../init";*/
 
 /*const Ajv = require("ajv");
 const ajv = new Ajv({ $data: true });*/
@@ -10,7 +10,7 @@ const ajv = new Ajv({ $data: true });*/
   sectionsApi.getSectionById = async (sectionId: string) => {
     console.log("in getSectionById", sectionId);
     /*try {
-      const documentSnapshot = await firestore
+      const documentSnapshot = await fire$$store
         .collection("sections")
         .doc(sectionId)
         .get();
@@ -48,7 +48,7 @@ const ajv = new Ajv({ $data: true });*/
   // };
 
   sectionsApi.getSectionByStatus = async (documentId, status) => {
-    /*const querySnapshot = await firestore.collection("sections")
+    /*const querySnapshot = await fire$$store.collection("sections")
     .where('documentId', "==", documentId)
     .where('status', "==", status)
     .get();
@@ -67,7 +67,7 @@ const ajv = new Ajv({ $data: true });*/
 
   sectionsApi.getSectionByDocumentId = async params => {
     console.log(params);
-    /*const query = firestore
+    /*const query = fire$$store
       .collection("sections")
       .where("documentId", "==", params)
       .orderBy("createdAt", "asc");
@@ -87,7 +87,7 @@ const ajv = new Ajv({ $data: true });*/
 
   sectionsApi.updateSection = async (sectionId, updateObject) => {
     /*try {
-      return await firestore
+      return await fire$$store
         .collection("sections")
         .doc(sectionId)
         .update(updateObject)
@@ -104,9 +104,9 @@ const ajv = new Ajv({ $data: true });*/
       const deadline = new Date();
       deadline.setHours(deadline.getHours() + data.timer);
       data.deadline = deadline;
-      /*const docRef = await firestore.collection("sections").add({
+      /*const docRef = await fire$$store.collection("sections").add({
         ...data,
-        createdAt: admin.firestore.FieldValue.serverTimestamp()
+        createdAt: admin.fire$$store.FieldValue.serverTimestamp()
       });
       console.log(docRef.id);
       return docRef.id;*/
@@ -118,7 +118,7 @@ const ajv = new Ajv({ $data: true });*/
 
   sectionsApi.checkStatus = async () => {
     try {
-      /*const sectionsSnapshot = await firestore
+      /*const sectionsSnapshot = await fire$$store
         .collection("sections")
         .orderBy("status")
         .startAt(2)
@@ -148,7 +148,7 @@ const ajv = new Ajv({ $data: true });*/
   };
 
   sectionsApi.sectionChanged = data => {
-    /*return functions.firestore
+    /*return functions.fire$$store
       .document("sections/{sectionId}")
       .onWrite((change, context) => {
         const newValue = change.after.data();
