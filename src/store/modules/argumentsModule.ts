@@ -1,16 +1,16 @@
 import { ArgumentInterface } from "@/types/interfaces";
 import Vue from "vue";
 import * as enums from "@/types/enums";
-import { arrayUnion, arrayRemove } from "vuex-easy-firestore";
+//import { arrayUnion, arrayRemove } from "vuex-easy-fire$$store";
 import { mockDbName, insertByEnv, petchByEnv } from "../index";
 import uniqid from 'uniqid';
 
 export const argumentsModule = {
-  firestorePath: "arguments",
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: "arguments",
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: "collection",
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: "collection",
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: "argumentsModule",
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
@@ -33,7 +33,7 @@ export const argumentsModule = {
     debounceTimerMs: 1000,
     // HOOKS for local changes:
     insertHook(updateStore, doc, store) {
-      // Check vuex-easy-firestore hooks documentation
+      // Check vuex-easy-fire$$store hooks documentation
       return updateStore(doc);
     },
     patchHook(updateStore, doc, store) {
@@ -198,7 +198,7 @@ export const argumentsModule = {
         })
       })
       console.log("updatedSection:", updatedArgument)
-      Vue.set(state, "data", 
+      Vue.set(state, "data",
         [...state.data.filter(element => element.id !== id),
         updatedArgument])
     },
@@ -253,7 +253,7 @@ export const argumentsModule = {
      */
     userConvinced: async ({ dispatch, rootGetters }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
-      return await dispatch("patch", { id, convinced: arrayUnion(ownerUid) });
+      return await dispatch("patch", { id, convinced: [ownerUid]/*arrayUnion(ownerUid)*/ });
     },
     /**
      * deleted user the convinced array of the argument
@@ -261,7 +261,7 @@ export const argumentsModule = {
      */
     userUnconvinced: async ({ dispatch, rootGetters }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
-      return await dispatch("patch", { id, convinced: arrayRemove(ownerUid) });
+      return await dispatch("patch", { id, convinced: [ownerUid]/*arrayRemove(ownerUid)*/ });
     },
     /**
      * updating the arguments sectionsId after voting ends

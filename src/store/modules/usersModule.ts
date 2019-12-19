@@ -3,11 +3,11 @@ import * as enums from '@/types/enums';
 import { MiniUserInterface } from '@/types/interfaces';
 import { mockDbName } from '..';
 export const usersModule = {
-  firestorePath: 'users',
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: 'users',
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: 'collection',
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: 'collection',
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: 'usersModule',
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
