@@ -1,5 +1,5 @@
-import * as functions from "firebase-functions";
-/*import * as admin from "firebase-admin";
+/*import * as functions from "fire$$base-functions";
+import * as admin from "firebase-admin";
 import { fire$$store } from "./init";*/
 import { handleError } from "./handlers";
 import { log } from "./init";
@@ -12,7 +12,7 @@ const cors = require("cors")({
 });
 
 // Not operational (similar to scheduledFunction)
-exports.checkStatus = functions.https.onRequest(async (req, res) => {
+/*exports.checkStatus = functions.https.onRequest(async (req, res) => {
   const key = req.query.key;
   if (key !== functions.config().cron.key) {
     log.error(
@@ -30,10 +30,10 @@ exports.checkStatus = functions.https.onRequest(async (req, res) => {
   } catch (error) {
     handleError(error, res);
   }
-});
+});*/
 
 // Triggered by user pressing the 'Remove me from mailing list'
-exports.notificationsOff = functions.https.onRequest(async (req, res) => {
+/*exports.notificationsOff = functions.https.onRequest(async (req, res) => {
   const id = req.query.id;
   try {
     await userApi.notificationsOff(id);
@@ -41,10 +41,10 @@ exports.notificationsOff = functions.https.onRequest(async (req, res) => {
   } catch (error) {
     handleError(error, res);
   }
-});
+});*/
 
 // Send Mail notification
-exports.sendNotifications = functions.https.onRequest(async (req, res) => {
+/*exports.sendNotifications = functions.https.onRequest(async (req, res) => {
   console.log('sendNotifications XXX');
   return cors(req, res, async () => {
     if (req.method !== `PUT`) {
@@ -63,12 +63,12 @@ exports.sendNotifications = functions.https.onRequest(async (req, res) => {
       console.log(error);
     }
   });
-});
+});*/
 
 // Clean sections that reached dead line
-exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(context => {
+/*exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(context => {
   console.log('scheduledFunction XXX');
-  /*const DYNAMIC_STATUS = [0, 2, 4];
+  const DYNAMIC_STATUS = [0, 2, 4];
   const DYNAMIC_STATUS_NAMES = {
     2: "toDelete",
     4: "toEdit",
@@ -99,9 +99,8 @@ exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(c
           }
         });
       }
-    });*/
-  throw new Error("scheduledFunction Not Implemented");
-});
+    });
+});*/
 
 // exports.addVisabilitySections = functions.fire$$store.document("/sections/{id}").onCreate((snap, context) => {
 //   snap.ref.update({ visibility: "public" });

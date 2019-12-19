@@ -1,4 +1,4 @@
-import * as functions from "firebase-functions";
+/*import * as functions from "fire$$base-functions";*/
 
 import {log} from '../init'
 

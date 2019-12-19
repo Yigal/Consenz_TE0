@@ -167,7 +167,7 @@ export const sectionsModule = {
         const querySnapshot = await dispatch('fetch', {
           where,
         });
-        const size = querySnapshot.size !== undefined ? querySnapshot.size : 0;
+        const size = querySnapshot && querySnapshot.size !== undefined ? querySnapshot.size : 0;
         commit('setToSize', { status, size });
         commit('fetchedSize', { status });
         return size;

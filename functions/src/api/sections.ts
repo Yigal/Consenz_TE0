@@ -1,5 +1,5 @@
-/*import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
+/*import * as functions from "fire$$base-functions";
+import * as admin from "fire$$base-admin";
 import { fire$$store } from "../init";*/
 
 /*const Ajv = require("ajv");

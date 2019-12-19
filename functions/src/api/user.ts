@@ -1,4 +1,4 @@
-/*import * as admin from "firebase-admin";
+/*import * as admin from "fire$$base-admin";
 import {  fire$$store } from "../init";*/
 
 export const userApi = <any>{};
