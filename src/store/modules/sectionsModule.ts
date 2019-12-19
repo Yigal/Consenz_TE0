@@ -210,10 +210,12 @@ export const sectionsModule = {
       console.log('Return newSectionId ' + JSON.stringify(newSectionId));
       return newSectionId;
     },
+
     insertToMockData: ({state}, newSection) => {
       let newSectionId = uniqid();
       newSection = {...newSection, id: newSectionId}
       Vue.set(state.data, newSectionId, newSection);
+      return newSectionId;
     },
     /**
      * updates the section
