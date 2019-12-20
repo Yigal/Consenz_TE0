@@ -40,7 +40,7 @@ const getters: routerModuleGetter = {
     const isUserVotedTwiceCONS = object.cons.includes(userId);
 
     votes[vote].push(userId);
-    console.log('Added user id ' + userId + ' to ' + vote + " votes. New list: " + JSON.stringify(votes));
+    console.log('Added user id ' + userId + ' to ' + vote + " votes. New votes: " + JSON.stringify(votes));
 
     isUserVotedTwicePROS ? (votes.pros = object.pros.filter((uid) => uid !== userId)) : null;
     isUserVotedTwiceCONS ? (votes.cons = object.cons.filter((uid) => uid !== userId)) : null;

@@ -186,6 +186,7 @@ export default class CardArguments extends Vue {
    * user clicked on convinced button
    */
   public async convinced(argument) {
+    console.log('Convinced on argument ' + JSON.stringify(argument));
     const vote = argument.type
       ? enums.VOTING_OPTIONS.pros
       : enums.VOTING_OPTIONS.cons;
@@ -193,8 +194,10 @@ export default class CardArguments extends Vue {
       this.signIn();
     } else {
       if (this.isUserConvinced(argument)) {
+        console.log('User Unconvinced');
         await this.userUnconvinced(argument.id);
       } else {
+        console.log('User Convinced');
         this.loading = true;
         await this.userConvinced(argument.id);
         if (
