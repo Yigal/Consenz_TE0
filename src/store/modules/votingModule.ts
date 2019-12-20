@@ -181,7 +181,7 @@ const actions: ActionTree<VotingModuleState, RootState> = {
    * @param {string} parentSectionId
    * @param {number} sectionIndex
    */
-  endVoting: async ({ dispatch, commit, rootGetters }, { section, parentSectionId, sectionIndex, sendNotifications }) => Dispatch sectionsModule{
+  endVoting: async ({ dispatch, commit, rootGetters }, { section, parentSectionId, sectionIndex, sendNotifications }) => {
     if (sendNotifications) {
       await dispatch(
         'notificationsModule/sendParallelNotifications',
