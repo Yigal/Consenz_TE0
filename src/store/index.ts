@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { vuexEasyFirestore } from "vuex-easy-firestore";
 import { argumentsModule } from "./modules/argumentsModule";
 import { commentsModule } from "./modules/commentsModule";
 import { displayModule } from "./modules/displayModule";
@@ -15,11 +14,9 @@ import { votingModule } from "./modules/votingModule";
 Vue.use(Vuex);
 
 export const mockDbName = "consenz-test-environment-0";
-export let fetchByEnv = "fetchToMockData";
 export let petchByEnv = "petchToMockData";
-export let insertByEnv = "insertToMockData";  
+export let insertByEnv = "insertToMockData";
 
-let easyFirestore;
 let modules: any = {
   routerModule,
   displayModule,
@@ -27,40 +24,20 @@ let modules: any = {
   votingModule
 };
 
-if (process.env.NODE_ENV !== "development") {
-  const FirebaseDependency = require("@/firebase");
-  easyFirestore = vuexEasyFirestore(
-    [
-      sectionsModule,
-      argumentsModule,
-      mainModule,
-      usersModule,
-      commentsModule,
-      documentsModule
-    ],
-    {
-      logging: process.env.NODE_ENV !== "production",
-      FirebaseDependency
-    }
-  );
-  fetchByEnv = "fetch";
-  fetchByEnv = "petch";
-} else {
-  modules = {
-    ...modules,
-    sectionsModule,
-    argumentsModule,
-    mainModule,
-    usersModule,
-    commentsModule,
-    documentsModule
-  };
-}
+modules = {
+  ...modules,
+  sectionsModule,
+  argumentsModule,
+  mainModule,
+  usersModule,
+  commentsModule,
+  documentsModule
+};
 
 export const store = new Vuex.Store({
   state: {
     version: "1.0.0"
   },
   modules,
-  plugins: process.env.NODE_ENV !== "development" ? [easyFirestore] : []
+  plugins: process.env.NODE_ENV !== "development" ? [] : []
 });
