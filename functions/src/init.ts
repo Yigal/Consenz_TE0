@@ -13,16 +13,16 @@ console.log('functions/src init.ts');
 const env = "staging";
 
 // const serviceAccount = require(`../${env}.serviceAccount.json`);
-const serviceAccount = require("../staging.serviceAccount.json");
+/*const serviceAccount = require("../staging.serviceAccount.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: config.firebaseConfig["development"].databaseURL,
-});
+});*/
 
-export const firestore = admin.firestore();
+/*export const fire$$store = admin.fire$$store();
 const settings = { timestampsInSnapshots: true };
-console.log('Init firestore settings: ' + JSON.stringify(settings));
-firestore.settings(settings);
+console.log('Init fire$$store settings: ' + JSON.stringify(settings));
+fire$$store.settings(settings);*/
 
 /***************************** INTIZALIZE log **********************************/
 

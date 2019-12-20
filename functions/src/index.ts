@@ -1,10 +1,10 @@
-import * as functions from "firebase-functions";
+/*import * as functions from "fire$$base-functions";
 import * as admin from "firebase-admin";
-import { firestore } from "./init";
+import { fire$$store } from "./init";*/
 import { handleError } from "./handlers";
 import { log } from "./init";
 import { sendNotificationsToUsers } from "./api/mailNotifications";
-import { isReachedDeadline } from "./utils";
+//import { isReachedDeadline } from "./utils";
 import { userApi, sectionsApi } from "./api";
 
 const cors = require("cors")({
@@ -12,7 +12,7 @@ const cors = require("cors")({
 });
 
 // Not operational (similar to scheduledFunction)
-exports.checkStatus = functions.https.onRequest(async (req, res) => {
+/*exports.checkStatus = functions.https.onRequest(async (req, res) => {
   const key = req.query.key;
   if (key !== functions.config().cron.key) {
     log.error(
@@ -30,10 +30,10 @@ exports.checkStatus = functions.https.onRequest(async (req, res) => {
   } catch (error) {
     handleError(error, res);
   }
-});
+});*/
 
 // Triggered by user pressing the 'Remove me from mailing list'
-exports.notificationsOff = functions.https.onRequest(async (req, res) => {
+/*exports.notificationsOff = functions.https.onRequest(async (req, res) => {
   const id = req.query.id;
   try {
     await userApi.notificationsOff(id);
@@ -41,10 +41,10 @@ exports.notificationsOff = functions.https.onRequest(async (req, res) => {
   } catch (error) {
     handleError(error, res);
   }
-});
+});*/
 
 // Send Mail notification
-exports.sendNotifications = functions.https.onRequest(async (req, res) => {
+/*exports.sendNotifications = functions.https.onRequest(async (req, res) => {
   console.log('sendNotifications XXX');
   return cors(req, res, async () => {
     if (req.method !== `PUT`) {
@@ -63,10 +63,10 @@ exports.sendNotifications = functions.https.onRequest(async (req, res) => {
       console.log(error);
     }
   });
-});
+});*/
 
 // Clean sections that reached dead line
-exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(context => {
+/*exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(context => {
   console.log('scheduledFunction XXX');
   const DYNAMIC_STATUS = [0, 2, 4];
   const DYNAMIC_STATUS_NAMES = {
@@ -74,7 +74,7 @@ exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(c
     4: "toEdit",
   };
   const rejectedStatus = 6;
-  return firestore
+  return fire$$store
     .collection("sections")
     .get()
     .then(async querySnapshot => {
@@ -83,13 +83,13 @@ exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(c
           let time = doc.data().deadline;
           if (DYNAMIC_STATUS.includes(doc.data().status)) {
             if (isReachedDeadline(time)) {
-              const parentSectionId = await firestore
+              const parentSectionId = await fire$$store
                 .collection("sections")
                 .doc(doc.data().parentSectionId)
                 .get();
               if (parentSectionId.exists) {
                 parentSectionId.ref.update({
-                  [DYNAMIC_STATUS_NAMES[doc.data().status]]: admin.firestore.FieldValue.arrayRemove(doc.data().id),
+                  [DYNAMIC_STATUS_NAMES[doc.data().status]]: admin.fire$$store.FieldValue.arrayRemove(doc.data().id),
                 });
               }
               doc.ref.update({
@@ -100,17 +100,17 @@ exports.scheduledFunction = functions.pubsub.schedule("every 1 minutes").onRun(c
         });
       }
     });
-});
+});*/
 
-// exports.addVisabilitySections = functions.firestore.document("/sections/{id}").onCreate((snap, context) => {
+// exports.addVisabilitySections = functions.fire$$store.document("/sections/{id}").onCreate((snap, context) => {
 //   snap.ref.update({ visibility: "public" });
 // });
-// exports.addVisabilityArguments = functions.firestore.document("/arguments/{id}").onCreate((snap, context) => {
+// exports.addVisabilityArguments = functions.fire$$store.document("/arguments/{id}").onCreate((snap, context) => {
 //   return snap.ref.update({ visibility: "public" });
 // });
-// exports.addVisabilityComments = functions.firestore.document("/comments/{id}").onCreate((snap, context) => {
+// exports.addVisabilityComments = functions.fire$$store.document("/comments/{id}").onCreate((snap, context) => {
 //   return snap.ref.update({ visibility: "public" });
 // });
-// exports.addVisabilityDocuments = functions.firestore.document("/documents/{id}").onCreate((snap, context) => {
+// exports.addVisabilityDocuments = functions.fire$$store.document("/documents/{id}").onCreate((snap, context) => {
 //   return snap.ref.update({ visibility: "public" });
 // });

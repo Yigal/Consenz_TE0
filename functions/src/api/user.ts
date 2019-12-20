@@ -1,11 +1,11 @@
-import * as admin from "firebase-admin";
-import {  firestore } from "../init";
+/*import * as admin from "fire$$base-admin";
+import {  fire$$store } from "../init";*/
 
 export const userApi = <any>{};
 
 userApi.getUser = async id => {
-  try {
-    const documentSnapshot = await firestore
+  /*try {
+    const documentSnapshot = await fire$$store
       .collection("users")
       .doc(id)
       .get();
@@ -14,12 +14,13 @@ userApi.getUser = async id => {
     } else throw new Error("document is not exist!");
   } catch (error) {
     return error;
-  }
+  }*/
+  throw new Error("getUser Not Implemented");
 };
 
 userApi.getUsers = async id => {
   try {
-    const documentSnapshot = await firestore
+    const documentSnapshot = await fire$$store
       .collection("users")
       .get();
     if (!documentSnapshot.empty) {
@@ -39,22 +40,23 @@ userApi.getUsers = async id => {
 };
 
 userApi.updateUserDocuments = async (id, documentId) => {
-  try {
+  /*try {
     console.log("id:", id)
-    return firestore
+    return fire$$store
       .collection("users")
       .doc(id)
       .update({
-        documents: admin.firestore.FieldValue.arrayUnion(documentId)
+        documents: admin.fire$$store.FieldValue.arrayUnion(documentId)
       });
   } catch (error) {
     return error;
-  }
+  }*/
+  throw new Error("updateUserDocuments Not Implemented");
 };
 
 userApi.updateUserNotifications = async (id, notifications) => {
-  try {
-    return firestore
+  /*try {
+    return fire$$store
       .collection("users")
       .doc(id)
       .update({
@@ -62,13 +64,14 @@ userApi.updateUserNotifications = async (id, notifications) => {
       });
   } catch (error) {
     return error;
-  }
+  }*/
+  throw new Error("updateUserNotifications Not Implemented");
 };
 
 userApi.notificationsOff = async id => {
   console.log('notifications off: ', id)
-  try {
-    return firestore
+  /*try {
+    return fire$$store
       .collection("users")
       .doc(id)
       .update({
@@ -77,24 +80,26 @@ userApi.notificationsOff = async id => {
   } catch (error) {
     console.log(error)
     return error;
-  }
+  }*/
+  throw new Error("notificationsOff Not Implemented");
 };
 
 userApi.addUser = async (data) => {
-  try {
-    await firestore
+  /*try {
+    await fire$$store
       .collection("users")
-      .add({...data, createdAt: admin.firestore.FieldValue.serverTimestamp()});
+      .add({...data, createdAt: admin.fire$$store.FieldValue.serverTimestamp()});
   } catch (error) {
     throw new Error(error);
-  }
+  }*/
+  throw new Error("addUser Not Implemented");
 };
 
 userApi.deleteUser = async(id) => {
-  firestore.collection("users").doc(id).delete().then(function() {
+  /*fire$$store.collection("users").doc(id).delete().then(function() {
   }).catch(function(error) {
     console.error("Error removing document: ", error);
-  });
-
-} 
+  });*/
+  throw new Error("deleteUser Not Implemented");
+};
 
