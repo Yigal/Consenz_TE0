@@ -1,16 +1,16 @@
-import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
-import { firestore } from "../init";
+/*import * as functions from "fire$$base-functions";
+import * as admin from "fire$$base-admin";
+import { fire$$store } from "../init";*/
 
-const Ajv = require("ajv");
-const ajv = new Ajv({ $data: true });
+/*const Ajv = require("ajv");
+const ajv = new Ajv({ $data: true });*/
 
   export const sectionsApi = <any>{};
 
   sectionsApi.getSectionById = async (sectionId: string) => {
     console.log("in getSectionById", sectionId);
-    try {
-      const documentSnapshot = await firestore
+    /*try {
+      const documentSnapshot = await fire$$store
         .collection("sections")
         .doc(sectionId)
         .get();
@@ -18,13 +18,14 @@ const ajv = new Ajv({ $data: true });
         const obj: { [k: string]: any } = {};
         obj.id = sectionId;
         Object.assign(obj, documentSnapshot.data());
-        return [obj]; 
+        return [obj];
       } else {
         throw new Error("Nothing");
       }
     } catch (error) {
       throw new Error(error);
-    }
+    }*/
+    throw new Error("getSectionById Not Implemented");
   };
 
   // sectionsApi.getSectionWithParams = async params => {
@@ -47,7 +48,7 @@ const ajv = new Ajv({ $data: true });
   // };
 
   sectionsApi.getSectionByStatus = async (documentId, status) => {
-    const querySnapshot = await firestore.collection("sections")
+    /*const querySnapshot = await fire$$store.collection("sections")
     .where('documentId', "==", documentId)
     .where('status', "==", status)
     .get();
@@ -60,12 +61,13 @@ const ajv = new Ajv({ $data: true });
         objs.push(obj);
       });
       return objs;
-    } else return [];
+    } else return [];*/
+    return [];
   };
 
   sectionsApi.getSectionByDocumentId = async params => {
     console.log(params);
-    const query = firestore
+    /*const query = fire$$store
       .collection("sections")
       .where("documentId", "==", params)
       .orderBy("createdAt", "asc");
@@ -79,19 +81,21 @@ const ajv = new Ajv({ $data: true });
         objs.push(obj);
       });
       return objs;
-    } else return [];
+    } else return [];*/
+    return [];
   };
 
   sectionsApi.updateSection = async (sectionId, updateObject) => {
-    try {
-      return await firestore
+    /*try {
+      return await fire$$store
         .collection("sections")
         .doc(sectionId)
         .update(updateObject)
         // .then(() => "success!");
     } catch (error) {
       throw new Error(error);
-    }
+    }*/
+    throw new Error("updateSection Not Implemented");
   };
 
   sectionsApi.addSection = async data => {
@@ -100,12 +104,13 @@ const ajv = new Ajv({ $data: true });
       const deadline = new Date();
       deadline.setHours(deadline.getHours() + data.timer);
       data.deadline = deadline;
-      const docRef = await firestore.collection("sections").add({
+      /*const docRef = await fire$$store.collection("sections").add({
         ...data,
-        createdAt: admin.firestore.FieldValue.serverTimestamp()
+        createdAt: admin.fire$$store.FieldValue.serverTimestamp()
       });
       console.log(docRef.id);
-      return docRef.id;
+      return docRef.id;*/
+      throw new Error("addSection Not Implemented");
     } catch (error) {
       throw new Error(error);
     }
@@ -113,7 +118,7 @@ const ajv = new Ajv({ $data: true });
 
   sectionsApi.checkStatus = async () => {
     try {
-      const sectionsSnapshot = await firestore
+      /*const sectionsSnapshot = await fire$$store
         .collection("sections")
         .orderBy("status")
         .startAt(2)
@@ -135,14 +140,15 @@ const ajv = new Ajv({ $data: true });
           }
           return "All Good!";
         });
-      } else return "No Sections with status 2/3";
+      } else return "No Sections with status 2/3";*/
+      return "No Sections with status 2/3";
     } catch (error) {
       throw new Error(error);
     }
   };
 
   sectionsApi.sectionChanged = data => {
-    return functions.firestore
+    /*return functions.fire$$store
       .document("sections/{sectionId}")
       .onWrite((change, context) => {
         const newValue = change.after.data();
@@ -151,5 +157,6 @@ const ajv = new Ajv({ $data: true });
         console.log("previousValue:", previousValue);
         if (newValue.documentId === data) return newValue;
         else return false;
-      });
+      });*/
+    throw new Error("sectionChanged Not Implemented");
   };
