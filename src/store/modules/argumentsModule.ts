@@ -199,7 +199,7 @@ export const argumentsModule = {
         })
       })
       console.log("updatedSection:", updatedArgument)
-      Vue.set(state, "data", 
+      Vue.set(state, "data",
         [...state.data.filter(element => element.id !== id),
         updatedArgument])
     },
@@ -254,9 +254,12 @@ export const argumentsModule = {
      */
     userConvinced: async ({ dispatch, rootGetters, state }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
-      return process.env.NODE_ENV !== "development" 
-        ? await dispatch("patch", { id, convinced: arrayUnion(ownerUid) }) 
-        : state.data[id].convinced.push(ownerUid);
+      if (process.env.NODE_ENV === "development") {
+        return state.data[id].convinced.push(ownerUid);
+      } else {
+        let union = arrayUnion(ownerUid);
+        return await dispatch("patch", {id, convinced: union});
+      }
     },
     /**
      * deleted user the convinced array of the argument
@@ -265,9 +268,11 @@ export const argumentsModule = {
     userUnconvinced: async ({ dispatch, rootGetters, state }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
       const filtered = state.data[id].convinced.filter(uid => uid !== ownerUid)
-      return process.env.NODE_ENV !== "development" 
-      ? await dispatch("patch", { id, convinced: arrayRemove(ownerUid) })
-      : Vue.set(state.data[id], "convinced", filtered);
+      if (process.env.NODE_ENV === "development") {
+        return Vue.set(state.data[id], "convinced", filtered);
+      } else {
+        return await dispatch("patch", {id, convinced: arrayRemove(ownerUid)});
+      }
     },
     /**
      * updating the arguments sectionsId after voting ends
