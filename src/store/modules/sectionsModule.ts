@@ -4,8 +4,7 @@ import * as constants from "@/types/constants";
 import { Promise } from "bluebird";
 import Vue from "vue";
 import uniqid from "uniqid";
-import { keys } from "ts-transformer-keys";
-import { mockDbName, insertByEnv, petchByEnv, fetchByEnv } from "../index";
+import { mockDbName, insertByEnv, petchByEnv } from "../index";
 
 export const sectionsModule = {
   firestorePath: "sections",
