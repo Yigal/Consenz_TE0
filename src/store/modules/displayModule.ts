@@ -91,7 +91,9 @@ export const displayModule = {
      */
     setNavBar: (context, payload) => {
       Object.keys(payload).forEach((key) => {
-        Object.assign((context.navBar[key] = payload[key]));
+        const navBar = context.navBar;
+        const payloadElement = payload[key];
+        Object.assign((navBar[key] = payloadElement));
       });
     },
   },

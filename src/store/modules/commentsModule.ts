@@ -1,16 +1,16 @@
 import { CommentInterface } from '@/types/interfaces';
 import Vue from 'vue';
-import * as enums from '@/types/enums';
-import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
+/*import * as enums from '@/types/enums';
+import { arrayUnion, arrayRemove } from 'vuex-easy-fire$$store';*/
 import { mockDbName, insertByEnv, petchByEnv } from '../index';
 import uniqid from 'uniqid';
 
 export const commentsModule = {
-  firestorePath: 'comments',
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: 'comments',
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: 'collection',
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: 'collection',
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: 'commentsModule',
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
