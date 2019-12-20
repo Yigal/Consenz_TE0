@@ -40,6 +40,7 @@ const getters: routerModuleGetter = {
     const isUserVotedTwiceCONS = object.cons.includes(userId);
 
     votes[vote].push(userId);
+    console.log('Added user id ' + userId + ' to ' + vote + " votes. New list: " + JSON.stringify(votes));
 
     isUserVotedTwicePROS ? (votes.pros = object.pros.filter((uid) => uid !== userId)) : null;
     isUserVotedTwiceCONS ? (votes.cons = object.cons.filter((uid) => uid !== userId)) : null;
@@ -105,16 +106,16 @@ const actions: ActionTree<VotingModuleState, RootState> = {
    * @param {VotesInterface} vote
    */
   addVote: async ({ state, getters, dispatch, rootGetters }, { type, object, vote }: { type: 'document' | 'section'; object: SectionInterface | DocumentInterface; vote: string }) => {
+    console.log('Add ' + type + ' Vote ' + vote);
     const updatedVotes = getters.updatedVoted(type, object, vote);
     const theModule = `${type}sModule`;
-    await dispatch(
-      `${theModule}/update${type.charAt(0).toUpperCase() + type.slice(1)}`,
-      {
-        id: object.id,
-        updateObject: updatedVotes,
-      },
-      { root: true },
-    );
+    let dispatchType = `${theModule}/update${type.charAt(0).toUpperCase() + type.slice(1)}`;
+    let dispatchPayload = {
+      id: object.id,
+      updateObject: updatedVotes,
+    };
+    console.log('Dispatch ' + dispatchType + ': ' + JSON.stringify(dispatchPayload));
+    await dispatch( dispatchType, dispatchPayload, { root: true });
     return updatedVotes;
   },
   /**

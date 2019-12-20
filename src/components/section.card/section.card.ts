@@ -108,6 +108,7 @@ export default class SectionCard extends Vue {
     if (!this.isSignedIn) {
       this.signIn();
     } else {
+      console.log('User Voted: ' + JSON.stringify(vote));
       await this.checkUserProperties();
       // If this user is privileged (super user) than his breaks the vote
       if (this.privilegeEditorCheckbox) { return this.activatePrivilege(vote); }
