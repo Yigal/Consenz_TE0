@@ -4,11 +4,11 @@ import firebase from 'firebase/app';
 import {mockDbName} from '../index'
 
 export const mainModule = {
-  firestorePath: 'consenz/{version}',
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: 'consenz/{version}',
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: 'doc',
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: 'doc',
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: 'mainModule',
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
@@ -112,7 +112,7 @@ export const mainModule = {
     initStore: async ({ state, dispatch, commit, rootGetters }) => {
 
       // check this: in democXrasee project, this code block does not exist
-      // const firestore = firebase.firestore();
+      // const fire$$store = firebase.fire$$store();
 
       if (process.env.NODE_ENV === 'development') {
         console.log('developing')
@@ -142,7 +142,7 @@ export const mainModule = {
             },
             { root: true },
           );
-  
+
         } catch (error) {
           console.error(error);
         } finally {
@@ -155,7 +155,7 @@ export const mainModule = {
       }
 
     },
-    initStoreWithMochData: ({state, commit}) => {      
+    initStoreWithMochData: ({state, commit}) => {
       commit('documentsModule/setPrettyLink', state.prettyLink, { root: true });
 
       commit('loadMockData', 'v1' )
