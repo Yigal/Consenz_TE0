@@ -38,13 +38,22 @@ const getters: routerModuleGetter = {
     }
     const isUserVotedTwicePROS = object.pros.includes(userId);
     const isUserVotedTwiceCONS = object.cons.includes(userId);
-
     votes[vote].push(userId);
-    console.log('Added user id ' + userId + ' to ' + vote + " votes. New votes: " + JSON.stringify(votes));
-
-    isUserVotedTwicePROS ? (votes.pros = object.pros.filter((uid) => uid !== userId)) : null;
-    isUserVotedTwiceCONS ? (votes.cons = object.cons.filter((uid) => uid !== userId)) : null;
-    if (type === 'document' && object.documentConditionalSupport) { isUserVotedTwicePROSconditional ? (votes.prosConditional = object.prosConditional.filter((uid) => uid !== userId)) : null; }
+    if (isUserVotedTwicePROS) {
+      votes.pros = object.pros.filter((uid) => uid !== userId);
+      console.log('User Voted Twice PROS, New votes.pros: ' + JSON.stringify(votes.pros));
+    }
+    if (isUserVotedTwiceCONS) {
+      votes.cons = object.cons.filter((uid) => uid !== userId);
+      console.log('User Voted Twice CONS, New votes.cons: ' + JSON.stringify(votes.cons));
+    }
+    if (type === 'document' && object.documentConditionalSupport) {
+      if (isUserVotedTwicePROSconditional) {
+        votes.prosConditional = object.prosConditional.filter((uid) => uid !== userId);
+        console.log('User Voted Twice PROS conditional, New votes.prosConditional: ' + JSON.stringify(votes.prosConditional));
+      }
+    }
+    console.log('User ' + userId + ' voted ' + vote + ". New votes: " + JSON.stringify(votes));
     return votes;
   },
   isSectionReachedToThreshold: (state) => (section, votes) => {
@@ -172,7 +181,7 @@ const actions: ActionTree<VotingModuleState, RootState> = {
    * @param {string} parentSectionId
    * @param {number} sectionIndex
    */
-  endVoting: async ({ dispatch, commit, rootGetters }, { section, parentSectionId, sectionIndex, sendNotifications }) => {
+  endVoting: async ({ dispatch, commit, rootGetters }, { section, parentSectionId, sectionIndex, sendNotifications }) => Dispatch sectionsModule{
     if (sendNotifications) {
       await dispatch(
         'notificationsModule/sendParallelNotifications',

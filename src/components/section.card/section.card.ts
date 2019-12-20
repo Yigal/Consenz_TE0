@@ -104,7 +104,7 @@ export default class SectionCard extends Vue {
    * adding vote to section
    * @param {string} vote
    */
-  private async onUserVoted(vote: enums.VOTING_OPTIONS) {// triggered by userVoted event
+  private async onUserVoted(vote: enums.VOTING_OPTIONS) {// triggered by -userVoted event
     if (!this.isSignedIn) {
       this.signIn();
     } else {
