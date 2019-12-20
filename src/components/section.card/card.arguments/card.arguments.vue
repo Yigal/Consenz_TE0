@@ -210,10 +210,9 @@ export default class CardArguments extends Vue {
           this.loading = false;
           return;
         }
-        await this.$emit(
-          'userVoted',
-          argument.type ? enums.VOTING_OPTIONS.pros : enums.VOTING_OPTIONS.cons,
-        );
+        const emitType = argument.type ? enums.VOTING_OPTIONS.pros : enums.VOTING_OPTIONS.cons;
+        console.log('emit userVoted ' + emitType);
+        await this.$emit('userVoted', emitType);
         this.loading = false;
       }
     }

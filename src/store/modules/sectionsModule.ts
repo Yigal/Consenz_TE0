@@ -281,16 +281,17 @@ export const sectionsModule = {
     },
 
     petchToMockData: ({ state }, { id, updateObject }) => {
-      console.log("updateSection", updateObject, state.data[id]);
+      console.log("petchToMockData: state.data[" + id + "]: " + JSON.stringify(state.data[id]) +
+        ", updateObject: " + JSON.stringify(updateObject));
       let updatedSection = state.data[id];
       Object.keys(updateObject).forEach(key => {
-        updatedSection = Object.assign(state.data[id], {
+        updatedSection = Object.assign(updatedSection, {
           [key]: updateObject[key]
         });
       });
-      console.log("updatedSection:", updatedSection);
+      console.log("Vue set state.data " + id + " to ", JSON.stringify(updatedSection));
       Vue.set(state.data, id, updatedSection);
-      console.log(state.data[id]);
+      console.log("New state.data[" + id + "]: " + JSON.stringify(state.data[id]));
     },
     /**
      * updates the parent section of the section
