@@ -30,7 +30,8 @@ const getters: routerModuleGetter = {
     if (Object.keys(params).length > 0) {
       path = '?';
       Object.keys(params).forEach((key) => {
-        path += `${key}=${params[key].toString()}`;
+        let param = params[key] ? params[key].toString() : '';
+        path += `${key}=${param}`;
         if (Object.keys(params).indexOf(key) !== Object.keys(params).length - 1) {
           path += '&';
         }
