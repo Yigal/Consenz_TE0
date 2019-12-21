@@ -275,7 +275,7 @@ export default class AddNew extends Vue {
    * Add argument to section
    */
   private async addArgumentToDB() {
-    const newArgId = await this.addArgument({// This syncs with firebase
+    const newArgId = await this.addArgument({// This syncs with fire$$base
       content: this.input,
       contentHtml: this.contentHtml,
       sectionId: this.sectionId,

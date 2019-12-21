@@ -10,7 +10,7 @@ import {
 } from '@/store/store.helper';
 import { NavBarInterface, NAVBAR_SIDE_ICON } from '@/store/types';
 // import { ROUTE_NAME } from "@/types/enums";
-import firebase from 'firebase/app';
+// import fire$$base from 'fire$$base/app';
 import { Component, Vue } from 'vue-property-decorator';
 import { ROUTE_NAME } from '../../types/enums';
 const DEFAULT_TRANSITION = 'slide-left';
@@ -111,7 +111,7 @@ export default class NavBar extends Vue {
 
   private async logout() {
     if (this.isSignedIn) {
-      await firebase.auth().signOut();
+      //await fire$$base.auth().signOut();
       await this.logOut();
       this.toggleDrawer();
     }
