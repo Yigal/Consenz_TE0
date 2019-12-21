@@ -209,6 +209,7 @@ export const documentsModule = {
         id,
         about: '',
         documentTopics: ['מבוא', 'סיכום'],
+        sendNotifications: true,
         threshold: 2,
         timer: 24,
         editors: [],
