@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import 'font-awesome/css/font-awesome.min.css';
 import VSwitch from 'v-switch-case';
 import VeeValidate from 'vee-validate';
@@ -18,18 +17,8 @@ import VueAnalytics from 'vue-analytics';
 
 console.log('main.ts');
 
-if (process.env.NODE_ENV !== "development") {
-  firebase.auth().onAuthStateChanged(async (user) => {
-  store.commit('usersModule/setIsNewUser');
-  if (user) {
-    store.dispatch('usersModule/onAuthStateChanged', { user, isNewUser: false });
-  }
-});
-} else {
-  const user = require('../database/consenz-test-environment-0/collections/users.json')[0]
-  store.commit('usersModule/setCurrentUser', user);
-
-}
+const user = require('../database/consenz-test-environment-0/collections/users.json')[0]
+store.commit('usersModule/setCurrentUser', user);
 
 export const eventBus = new Vue();
 

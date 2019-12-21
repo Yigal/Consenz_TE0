@@ -5,7 +5,6 @@ import { commentsModule } from "./modules/commentsModule";
 import { displayModule } from "./modules/displayModule";
 import { documentsModule } from "./modules/documentsModule";
 import { mainModule } from "./modules/mainModule";
-import { notificationsModule } from "./modules/notificationsModule";
 import { routerModule } from "./modules/routerModule";
 import { sectionsModule } from "./modules/sectionsModule";
 import { usersModule } from "./modules/usersModule";
@@ -20,7 +19,6 @@ export let insertByEnv = "insertToMockData";
 let modules: any = {
   routerModule,
   displayModule,
-  notificationsModule,
   votingModule
 };
 

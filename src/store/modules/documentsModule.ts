@@ -105,15 +105,6 @@ export const documentsModule = {
       }
       return datum.about;
     },
-    documentSendNotifications: (state) => {
-      const prettyLink = state.prettyLink;
-      const data = state.data;
-      const datum = data[prettyLink];
-      if (datum == null) {
-        return datum;
-      }
-      return datum.sendNotifications;
-    },
     documentTimer: (state) => {
       const prettyLink = state.prettyLink;
       const data = state.data;

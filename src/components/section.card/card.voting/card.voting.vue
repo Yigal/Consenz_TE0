@@ -79,7 +79,6 @@ import {
   SectionsModule,
   VotingModule,
   UsersModule,
-  NotificationsModule,
   DocumentsModule,
 } from '@/store/store.helper';
 import { SectionInterface, VotesInterface } from '@/types/interfaces';
@@ -125,8 +124,6 @@ export default class CardVoting extends Vue {
   @UsersModule.UsersAction private checkUserProperties;
   @UsersModule.UsersAction
   private signIn;
-
-  @NotificationsModule.NotificationsAction private sendParallelNotifications;
 
   @VotingModule.VotingGetter private isUserVoted;
   @VotingModule.VotingGetter private votingOptionsKeys;

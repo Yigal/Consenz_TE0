@@ -183,21 +183,8 @@ const actions: ActionTree<VotingModuleState, RootState> = {
    * @param {string} parentSectionId
    * @param {number} sectionIndex
    */
-  endVoting: async ({ dispatch, commit, rootGetters }, { section, parentSectionId, sectionIndex, sendNotifications }) => {
-    if (sendNotifications) {
-      await dispatch(
-        'notificationsModule/sendParallelNotifications',
-        {
-          newContent: section.content,
-          recipientsTypesArray: [enums.MAIL_RECIPIENT.voters, enums.MAIL_RECIPIENT.owner],
-          emailType: enums.NOTIFICATION_TYPE.vote,
-          sectionId: section.id,
-          parentSectionId,
-          status: section.status,
-        },
-        { root: true },
-      );
-    }
+  endVoting: async ({ dispatch, commit, rootGetters }, { section, parentSectionId, sectionIndex }) => {
+
     commit(
       'displayModule/setNavBar',
       {
