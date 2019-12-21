@@ -4,9 +4,9 @@ let databaseURL = '';
 if (process.env.NODE_ENV !== "development") {
   const config = require('@/config')
   databaseURL = config.firebaseConfig[process.env.NODE_ENV!].cloudFuctions;
-  
+
 }
-  
+
 export default {
   async getUser(uid) {
     try {
@@ -50,8 +50,5 @@ export default {
   },
   async updateConsensus(data) {
     return await axios.put(`${databaseURL}/updateConsensus`, { ...data });
-  },
-  async sendNotifications(data) {
-    return await axios.put(`${databaseURL}/sendNotifications`, { ...data });
   },
 };

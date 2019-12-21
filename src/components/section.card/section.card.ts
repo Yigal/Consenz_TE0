@@ -10,7 +10,7 @@ import CardArguments from './card.arguments/card.arguments.vue';
 import CardText from './card.text/card.text.vue';
 import CardTitle from './card.title/card.title.vue';
 import CardVoting from './card.voting/card.voting.vue';
-import { DisplayModule, RouterModule, SectionsModule, UsersModule, NotificationsModule, VotingModule, DocumentsModule } from '@/store/store.helper';
+import { DisplayModule, RouterModule, SectionsModule, UsersModule, VotingModule, DocumentsModule } from '@/store/store.helper';
 import { SectionInterface, VotesInterface } from '@/types/interfaces';
 import * as enums from '@/types/enums';
 import { Prop } from 'vue-property-decorator';
@@ -61,10 +61,9 @@ export default class SectionCard extends Vue {
   @UsersModule.UsersAction private checkUserProperties;
   @UsersModule.UsersAction private signIn;
 
-  @NotificationsModule.NotificationsAction private sendParallelNotifications;
   @VotingModule.VotingGetter private isSectionReachedToThreshold: (SectionInterface, VotesInterface) => boolean;
   @VotingModule.VotingAction private addVote;
-  @VotingModule.VotingAction private endVoting: ({ section: SectionInterface, parentSectionId: string, sectionIndex: number, sendNotifications: boolean }) => Promise<any>;
+  @VotingModule.VotingAction private endVoting: ({ section: SectionInterface, parentSectionId: string, sectionIndex: number }) => Promise<any>;
   @VotingModule.VotingAction private updateAll: ({ updatedVotes: VotesInterface, section: SectionInterface, parentSectionId: string }) => Promise<any>;
   @VotingModule.VotingAction private addPrivilegeVote: ({ section: SectionInterface, parentSectionId: string, vote: VOTING_OPTIONS }) => Promise<any>;
 
@@ -128,8 +127,7 @@ export default class SectionCard extends Vue {
         await this.endVoting({
           section: this.section,
           parentSectionId: this.parentSectionId,
-          sectionIndex: this.sectionIndex,
-          sendNotifications: true,
+          sectionIndex: this.sectionIndex
         });
       } else if (!this.isSectionReachedToThreshold(this.section, updatedVotes) && this.isParentSection(this.parentSectionId)) {
         // route to section page with this specific section
@@ -154,7 +152,6 @@ export default class SectionCard extends Vue {
       section: this.section,
       parentSectionId: this.parentSectionId,
       sectionIndex: this.sectionIndex,
-      sendNotifications: false,
     });
   }
 }

@@ -6,11 +6,7 @@ export const DocumentsModule = {
   DocumentsMutation: namespace('documentsModule', Mutation),
   DocumentsAction: namespace('documentsModule', Action),
 };
-export const NotificationsModule = {
-  NotificationsGetter: namespace('notificationsModule', Getter),
-  NotificationsAction: namespace('notificationsModule', Action),
-  NotificationsMutation: namespace('notificationsModule', Mutation),
-};
+
 export const RouterModule = {
   RouterGetter: namespace('routerModule', Getter),
   RouterAction: namespace('routerModule', Action),

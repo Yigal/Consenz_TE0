@@ -7,7 +7,7 @@ import textEditor from '@/components/text.editor/text.editor.vue';
 import { Editor } from 'tiptap';
 import { Placeholder } from 'tiptap-extensions';
 import CustomLink from '@/costumes/custom.link';
-import { DisplayModule, RouterModule, DocumentsModule, NotificationsModule } from '@/store/store.helper';
+import { DisplayModule, RouterModule, DocumentsModule } from '@/store/store.helper';
 import { NavBarInterface, NAVBAR_SIDE_ICON } from '@/store/types';
 import * as enums from '@/types/enums';
 import { Component, Vue, Watch } from 'vue-property-decorator';
@@ -40,8 +40,6 @@ export default class AddNew extends Vue {
 
   @ArgumentsModule.ArgumentsAction private addArgument;
   @ArgumentsModule.ArgumentsAction private updateArgument;
-
-  @NotificationsModule.NotificationsAction private sendParallelNotifications;
 
   @CommentsModule.CommentsAction private addComment;
 
@@ -217,9 +215,7 @@ export default class AddNew extends Vue {
   private async addSectionToEdit() {
     console.log('AddNew.addSectionToEdit() Add Section To Edit');
     const newSectionId = await this.createNewSection();
-    const newSection: SectionInterface = this.sectionById(newSectionId)[0];
-    console.log('AddNew.addSectionToEdit() Send Notifications');
-    this.sendNotifications(newSection.content, [enums.MAIL_RECIPIENT.participants], enums.NOTIFICATION_TYPE.section, newSectionId, this.parentSectionId!, enums.SECTION_STATUS.toEdit);
+
     this.reloadPageToAddArgument(newSectionId, enums.SECTION_STATUS.toEdit);
     return null;
   }
@@ -236,7 +232,7 @@ export default class AddNew extends Vue {
       type: true,
     });
     const newSectionId = await this.createNewSection(newArgId);
-    this.sendNotifications(this.input, [enums.MAIL_RECIPIENT.voters, enums.MAIL_RECIPIENT.owner], enums.NOTIFICATION_TYPE.argument, newSectionId, this.parentSectionId!, enums.SECTION_STATUS.toDelete);
+
     return this.getPathByAction(newSectionId, newSectionId);
   }
 
@@ -258,8 +254,7 @@ export default class AddNew extends Vue {
       edited: [],
       topic: this.documentDivisionOfTopics ? this.topic : null,
     });
-    console.log('AddNew.addSectionInTheVote() Send newSectionId Notifications ' + newSectionId);
-    this.sendNotifications(this.input, [enums.MAIL_RECIPIENT.participants], enums.NOTIFICATION_TYPE.section, newSectionId, this.parentSectionId!, this.sectionStatus);
+
     console.log('AddNew.addSectionInTheVote() Reload Page To AddArgument');
     this.reloadPageToAddArgument(newSectionId, enums.SECTION_STATUS.inTheVote);
     return null;
@@ -287,9 +282,7 @@ export default class AddNew extends Vue {
       type: this.action === 'comment' ? null : this.action !== enums.VOTING_OPTIONS.cons,
     });
     if (!newArgId) { return; }
-    if (this.action !== 'comment' && !this.notificationsOff) {
-      this.sendNotifications(this.input, [enums.MAIL_RECIPIENT.voters, enums.MAIL_RECIPIENT.owner], enums.NOTIFICATION_TYPE.argument, this.sectionId!, this.parentSectionId!, this.sectionStatus);
-    }
+
     this.setNavBar({
       path: this.getPath({
         name: enums.ROUTE_NAME.section,
@@ -314,7 +307,7 @@ export default class AddNew extends Vue {
       sectionId: this.sectionId,
       argumentId: this.argumentId,
     });
-    this.sendNotifications(this.input, [enums.MAIL_RECIPIENT.responders, enums.MAIL_RECIPIENT.owner], enums.NOTIFICATION_TYPE.comment, this.sectionId!, this.parentSectionId!, this.sectionStatus, newCommentId);
+
     return this.getPathByAction(this.sectionId, newCommentId);
   }
 
@@ -384,32 +377,4 @@ export default class AddNew extends Vue {
     });
   }
 
-  /**
-   * send notifications after creating argument / section
-   * @param {string} newContent
-   * @param {enums.MAIL_RECIPIENT[]} recipientsTypesArray
-   * @param {enums.NOTIFICATION_TYPE} emailType
-   * @param {string} sectionId
-   * @param {string} parentSectionId
-   * @param {number} status
-   * @param commentId
-   */
-  private sendNotifications(newContent: string,
-        recipientsTypesArray: enums.MAIL_RECIPIENT[],
-        emailType: enums.NOTIFICATION_TYPE,
-        sectionId: string,
-        parentSectionId: string,
-        status: number,
-        commentId?: string) {
-    this.sendParallelNotifications({
-      newContent,
-      recipientsTypesArray,
-      emailType,
-      sectionId,
-      parentSectionId,
-      status,
-      argumentId: this.argumentId,
-      commentId,
-    });
-  }
 }
