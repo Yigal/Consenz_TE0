@@ -5,7 +5,6 @@ import AddDocument from "./views/AddDocuments/AddDocument.vue";
 import AddNew from "./views/AddNew/AddNew.vue";
 import Draft from "./views/Document/Draft/Draft.vue";
 import Section from "./views/Document/Section/Section.vue";
-import Login from "./views/Login/Login.vue";
 import aboutConsenz from "./views/NavBar/AboutConsenz.vue";
 import aboutDocument from "./views/NavBar/AboutDocument.vue";
 import contactUs from "./views/NavBar/ContactUs.vue";
@@ -14,11 +13,6 @@ import NavBar from "./views/NavBar/NavBar.vue";
 Vue.use(Router);
 
 export const routes = [
-  {
-    path: "/login",
-    name: "login",
-    component: Login,
-  },
   {
     path: "/",
     name: "home",
