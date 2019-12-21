@@ -154,9 +154,7 @@ export const routerModule = {
   getters,
   mutations,
   actions,
-  /** for vuex-easy-module */
-  firestorePath: '',
-  firestoreRefType: '',
+
   moduleName: '',
   statePropName: '',
   sync: {},

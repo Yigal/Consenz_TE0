@@ -7,8 +7,6 @@ import uniqid from "uniqid";
 import { mockDbName, insertByEnv, petchByEnv } from "../index";
 
 export const sectionsModule = {
-  firestorePath: "sections",
-  firestoreRefType: "collection", // or 'doc'
   moduleName: "sectionsModule",
   statePropName: "data",
   namespaced: true, // automatically added

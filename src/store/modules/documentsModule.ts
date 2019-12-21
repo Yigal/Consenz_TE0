@@ -2,14 +2,8 @@ import { DocumentInterface } from './../../types/interfaces';
 //import { ArgumentInterface } from '@/types/interfaces';
 import Vue from 'vue';
 import {mockDbName} from '../index'
-//import { arrayUnion, arrayRemove } from 'vuex-easy-fire$$store';
 
 export const documentsModule = {
-  //fire$$storePath: 'documents',
-  // The path to a "collection" or single "document" in fire$$store.
-  // You can use `{userId}` which will be replaced with the user Id.
-  //fire$$storeRefType: 'collection',
-  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: 'documentsModule',
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
