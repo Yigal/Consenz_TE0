@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import * as enums from '@/types/enums';
 import { MiniUserInterface } from '@/types/interfaces';
+import { mockDbName } from '..';
 export const usersModule = {
-  firestorePath: 'users',
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: 'users',
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: 'collection',
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: 'collection',
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: 'usersModule',
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
@@ -105,6 +106,13 @@ export const usersModule = {
     isUserEditor: (state) => state.currentUser.role === enums.ROLE.editor,
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/users.json`)
+      const dataObject = {}
+      mockData = mockData.filter(user => user.documents.includes(payload))        
+      .forEach(d => Object.assign(dataObject, { [d.id]: d }))
+      Vue.set(state, "data", dataObject);
+    },
     setUid: (state, uid) => {
       Vue.set(state.currentUser, 'uid', uid);
     },

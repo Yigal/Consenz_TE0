@@ -157,6 +157,8 @@ export default class DocumentDraft extends Vue {
       if (section.edited && section.edited.length > 0) {
         // take the first version createdAt timestamp
         const id = section.edited[0];
+        console.log("createdAt:::::", id, this.allSections, this.allSections[id])
+
         sectionsByTimestamp.push({
           timestamp: this.allSections[id].createdAt,
           section,
@@ -168,7 +170,8 @@ export default class DocumentDraft extends Vue {
         });
       }
     });
-    sectionsByTimestamp = sectionsByTimestamp.sort((sectionA, sectionB) => sectionA.timestamp.getTime() - sectionB.timestamp.getTime()).map((section) => section.section);
+    sectionsByTimestamp = sectionsByTimestamp.sort((sectionA, sectionB) => 
+    new Date(sectionA.timestamp).getTime() - new Date(sectionB.timestamp).getTime()).map((section) => section.section);
     return sectionsByTimestamp;
   }
 

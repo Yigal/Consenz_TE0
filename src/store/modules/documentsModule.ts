@@ -1,15 +1,15 @@
 import { DocumentInterface } from './../../types/interfaces';
-import { ArgumentInterface } from '@/types/interfaces';
+//import { ArgumentInterface } from '@/types/interfaces';
 import Vue from 'vue';
-import * as enums from '@/types/enums';
-import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
+import {mockDbName} from '../index'
+//import { arrayUnion, arrayRemove } from 'vuex-easy-fire$$store';
 
 export const documentsModule = {
-  firestorePath: 'documents',
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: 'documents',
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: 'collection',
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: 'collection',
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: 'documentsModule',
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
@@ -77,6 +77,7 @@ export const documentsModule = {
   // You can also add custom state/getters/mutations/actions. These will be added to your module.
   state: {
     prettyLink: undefined,
+    data: {}
   },
   getters: {
     state: (state) => state,
@@ -202,6 +203,11 @@ export const documentsModule = {
     },
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/documents.json`)
+      mockData = mockData.filter(d => d.id === payload)[0]
+      Vue.set(state.data, state.prettyLink, mockData);
+    },
     setPrettyLink: (state, payload) => {
       console.log('Set PrettyLink ' + JSON.stringify(payload));
       Vue.set(state, 'prettyLink', payload);
@@ -235,7 +241,7 @@ export const documentsModule = {
       await context.dispatch('patch', { id: context.getters.documentId, ...updateObject });
     },
     addTopic: async (context, topic) => {
-      await context.dispatch('patch', { id: context.state.documentId, documentTopics: arrayUnion(topic) });
+      await context.dispatch('patch', { id: context.state.documentId, documentTopics: [topic]/*arrayUnion(topic)*/ });
     },
   },
 };

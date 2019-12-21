@@ -1,35 +1,40 @@
-import { SectionInterface, ParentSectionInterface } from '@/types/interfaces';
-import * as enums from '@/types/enums';
-import * as constants from '@/types/constants';
-import { Promise } from 'bluebird';
-import Vue from 'vue';
-import { keys } from 'ts-transformer-keys';
+import { SectionInterface, ParentSectionInterface } from "@/types/interfaces";
+import * as enums from "@/types/enums";
+import * as constants from "@/types/constants";
+import { Promise } from "bluebird";
+import Vue from "vue";
+import uniqid from "uniqid";
+import { mockDbName, insertByEnv, petchByEnv } from "../index";
 
 export const sectionsModule = {
-  firestorePath: 'sections',
-  firestoreRefType: 'collection', // or 'doc'
-  moduleName: 'sectionsModule',
-  statePropName: 'data',
+  firestorePath: "sections",
+  firestoreRefType: "collection", // or 'doc'
+  moduleName: "sectionsModule",
+  statePropName: "data",
   namespaced: true, // automatically added
   // you can also add your own state/getters/mutations/actions
   serverChange: {
     convertTimestamps: {
-      createdAt: '%convertTimestamp%',
-      acceptedAt: '%convertTimestamp%',
-      deadline: '%convertTimestamp%',
+      createdAt: "%convertTimestamp%",
+      acceptedAt: "%convertTimestamp%",
+      deadline: "%convertTimestamp%"
     },
     addedHook(updateStore, doc, id, store) {
       return updateStore(doc);
     },
     modifiedHook(updateStore, doc, id, store) {
-      if ((doc.acceptedAt && doc.status === enums.SECTION_STATUS.approved) || doc.status === enums.SECTION_STATUS.edited || doc.status === enums.SECTION_STATUS.deleted) {
-        store.commit('displayModule/showSnackbar', id);
+      if (
+        (doc.acceptedAt && doc.status === enums.SECTION_STATUS.approved) ||
+        doc.status === enums.SECTION_STATUS.edited ||
+        doc.status === enums.SECTION_STATUS.deleted
+      ) {
+        store.commit("displayModule/showSnackbar", id);
       }
       return updateStore(doc);
     },
     removedHook(updateStore, doc, id, store) {
       return updateStore(doc);
-    },
+    }
   },
   sync: {
     preventInitialDocInsertion: true,
@@ -58,55 +63,103 @@ export const sectionsModule = {
     },
     deleteBatchHook(updateStore, ids, store) {
       return updateStore(ids);
-    },
+    }
   },
   state: {
     isApprovedSections: false,
-    initialParentId: '0',
+    initialParentId: "0",
     size: {},
     isDbChannelIsOpen: false,
-    fetchedSize: {},
+    fetchedSize: {}
   },
   getters: {
-    data: (state) => state.data,
-    allSections: (state) => state.data,
-    initialParentId: (state) => state.initialParentId,
-    sizeByStatus: (state) => (status) => state.size[status],
+    data: state => state.data,
+    allSections: state => state.data,
+    initialParentId: state => state.initialParentId,
+    sizeByStatus: state => status => state.size[status],
     sectionsByStatus: (state, getters) => {
-      console.log('Sections By Status');
+      console.log("Sections By Status");
       return (status, sectionId?) => {
-        console.log('Status: ' + status + ', State data: ' + JSON.stringify(state.data));
+        console.log(
+          "Status: " + status + ", State data: " + JSON.stringify(state.data)
+        );
         status = parseInt(status);
-        const sectionsArray = status === enums.SECTION_STATUS.edited ? (getters['sectionById'](sectionId)[0] ? new Array(getters['sectionById'](sectionId)[0]) : []) : [];
+        const sectionsArray =
+          status === enums.SECTION_STATUS.edited
+            ? getters["sectionById"](sectionId)[0]
+              ? new Array(getters["sectionById"](sectionId)[0])
+              : []
+            : [];
         const data = state.data;
         return Object.keys(data)
-          .filter((key) => data[key].status === status)
-          .filter((key) => (sectionId ? data[key].parentSectionId === sectionId : true))
-          .map((id) => data[id])
-          .filter((section) => section !== undefined)
+          .filter(key => data[key].status === status)
+          .filter(key =>
+            sectionId ? data[key].parentSectionId === sectionId : true
+          )
+          .map(id => data[id])
+          .filter(section => section !== undefined)
           .concat(sectionsArray)
-          .sort((sectionA: SectionInterface, sectionB: SectionInterface) => (status === enums.SECTION_STATUS.edited ? sectionB.acceptedAt!.getTime() - sectionA.acceptedAt!.getTime() : status === enums.SECTION_STATUS.approved ? sectionA.createdAt.getTime() - sectionB.createdAt.getTime() : sectionB.createdAt.getTime() - sectionA.createdAt.getTime()));
-      }
+          .sort((sectionA: SectionInterface, sectionB: SectionInterface) =>
+            status === enums.SECTION_STATUS.edited
+              ? new Date(sectionB.acceptedAt!).getTime() -
+                new Date(sectionA.acceptedAt!).getTime()
+              : status === enums.SECTION_STATUS.approved
+              ? new Date(sectionA.createdAt).getTime() -
+                new Date(sectionB.createdAt).getTime()
+              : new Date(sectionB.createdAt).getTime() -
+                new Date(sectionA.createdAt).getTime()
+          );
+      };
     },
-    sectionById: (state) => (id) => [state.data[id]],
-    isSectionsInRevisions: (state) => (status) => Object.values(constants.STATIC_PAGES).includes(status),
-    isStaticFeed: (state) => (PageStatus: number) => Object.values(enums.STATIC_STATUS).includes(PageStatus),
-    isDynamicFeed: (state) => (PageStatus: number) => Object.values(enums.DYNAMIC_STATUS).includes(PageStatus),
+    sectionById: state => id => [state.data[id]],
+    isSectionsInRevisions: state => status =>
+      Object.values(constants.STATIC_PAGES).includes(status),
+    isStaticFeed: state => (PageStatus: number) =>
+      Object.values(enums.STATIC_STATUS).includes(PageStatus),
+    isDynamicFeed: state => (PageStatus: number) =>
+      Object.values(enums.DYNAMIC_STATUS).includes(PageStatus),
     sectionIndex: (state, getters) => (status, parentSectionId, sectionId) =>
-      getters['sectionsByStatus'](status, parentSectionId)
-        .map((section) => section.id)
+      getters["sectionsByStatus"](status, parentSectionId)
+        .map(section => section.id)
         .indexOf(sectionId) + 1,
-    isParentSection: (state, getters) => (sectionId) => sectionId === state.initialParentId || getters['sectionById'](sectionId)[0].status === enums.SECTION_STATUS.approved,
-    getDeadline: (state) => (deadline) => {
+    isParentSection: (state, getters) => sectionId =>
+      sectionId === state.initialParentId ||
+      getters["sectionById"](sectionId)[0].status ===
+        enums.SECTION_STATUS.approved,
+    getDeadline: state => deadline => {
       let time = deadline;
-      if ('seconds' in deadline) { time = new Date(time.seconds * 1000); } // Epoch
+      if (time.getSeconds()) {
+        time = new Date(time.getSeconds() * 1000);
+      } // Epoch
       const countDownDate = new Date(time).getTime();
       return countDownDate - new Date().getTime();
     },
-    sectionRejectedLength: (state) => Object.keys(state.data).filter((key) => state.data[key].status === enums.SECTION_STATUS.rejected).length,
-    isReachedDeadline: (state, getters) => (deadline) => getters.getDeadline(deadline) < 0,
+    sectionRejectedLength: state =>
+      Object.keys(state.data).filter(
+        key => state.data[key].status === enums.SECTION_STATUS.rejected
+      ).length,
+    isReachedDeadline: (state, getters) => deadline =>
+      getters.getDeadline(deadline) < 0
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/sections.json`);
+      const dataObject = {};
+      const newArray = mockData
+        .filter(d => d.documentId === payload)
+        .map(d =>
+          Object.assign(
+            { ...d },
+            {
+              createdAt: new Date(d.createdAt),
+              acceptedAt: d.acceptedAt ? new Date(d.acceptedAt) : null,
+              deadline: new Date(d.deadline)
+            }
+          )
+        )
+        .forEach(d => Object.assign(dataObject, { [d.id]: d }));
+      Vue.set(state, "data", dataObject);
+    },
     setToSectionById: (state, { id, payload }) => {
       Object.keys(state.data).forEach((key, index) => {
         if (key === id) {
@@ -120,59 +173,75 @@ export const sectionsModule = {
     fetchedSize: (state, { status }) => {
       Vue.set(state.fetchedSize, status, true);
     },
-    setIsDbChannelIsOpen: (state) => {
-      Vue.set(state, 'isDbChannelIsOpen', true);
-    },
+    setIsDbChannelIsOpen: state => {
+      Vue.set(state, "isDbChannelIsOpen", true);
+    }
   },
   actions: {
     /**
      * getting section by id
      */
-    getSectionById: async ({ state, getters, dispatch, rootGetters, commit }, { sectionId, action }: { sectionId: string; action: string }) => {
+    getSectionById: async (
+      { state, getters, dispatch, rootGetters, commit },
+      { sectionId, action }: { sectionId: string; action: string }
+    ) => {
       if (state.data[sectionId] !== undefined) {
-        return getters['sectionById'](sectionId)[0];
+        return getters["sectionById"](sectionId)[0];
       } else {
-        const where = [['documentId', '==', rootGetters['mainModule/prettyLink']], ['id', '==', sectionId]];
+        const where = [
+          ["documentId", "==", rootGetters["mainModule/prettyLink"]],
+          ["id", "==", sectionId]
+        ];
         await dispatch(action, { where });
-        commit('setIsDbChannelIsOpen');
-
-        return getters['sectionById'](sectionId)[0];
+        commit("setIsDbChannelIsOpen");
+        return getters["sectionById"](sectionId)[0];
       }
     },
     /**
      * gets the size of the sections in a specific status
      * @param {number} status
      */
-    getSizeByStatus: async ({ state, rootGetters, dispatch, getters, commit }, status) => {
-      if (state.fetchedSize[status]) {
-        return getters['sizeByStatus'](status);
+    getSizeByStatus: async (
+      { state, rootGetters, dispatch, getters, commit },
+      status
+    ) => {
+      if (state.fetchedSize[status] || process.env.NODE_ENV === "development") {
+        return Object.keys(state.data).filter(
+          key => state.data[key].status === status
+        ).length;
       } else {
-        const where = [['documentId', '==', rootGetters['mainModule/prettyLink']], ['status', '==', status]];
-        const querySnapshot = await dispatch('fetch', {
-          where,
+        const where = [
+          ["documentId", "==", rootGetters["mainModule/prettyLink"]],
+          ["status", "==", status]
+        ];
+        const querySnapshot = await dispatch("fetch", {
+          where
         });
-        const size = querySnapshot.size !== undefined ? querySnapshot.size : 0;
-        commit('setToSize', { status, size });
-        commit('fetchedSize', { status });
+        const size = querySnapshot && querySnapshot.size !== undefined ? querySnapshot.size : 0;
+        commit("setToSize", { status, size });
+        commit("fetchedSize", { status });
         return size;
       }
     },
+
     /**
      * adding section
      * @param payload
      */
-    addSection: async ({ rootGetters, dispatch }, payload) => {
-      console.log('sectionsModule.addSection() Add Section ' + JSON.stringify(payload));
+    addSection: async ({ rootGetters, dispatch, state }, payload) => {
+      console.log(
+        "sectionsModule.addSection() Add Section " + JSON.stringify(payload)
+      );
       const deadline = new Date();
-      let timer = rootGetters['documentsModule/documentTimer'];
-      if (timer == null){
+      let timer = rootGetters["documentsModule/documentTimer"];
+      if (timer == null) {
         timer = 1000;
       }
       const hours = deadline.getHours() + timer;
       deadline.setHours(hours);
-      let documentId = rootGetters['documentsModule/documentId'];
-      const userUid = rootGetters['usersModule/userUid'];
-      const newSection = {
+      let documentId = rootGetters["documentsModule/documentId"];
+      const userUid = rootGetters["usersModule/userUid"];
+      let newSection = {
         ...payload,
         cons: [],
         createdAt: new Date(),
@@ -180,18 +249,26 @@ export const sectionsModule = {
         documentId: documentId,
         owner: userUid,
         pros: [userUid],
-        timer: timer,
+        timer: timer
       };
-      const documentThreshold = rootGetters['documentsModule/documentThreshold'];
-      if (documentThreshold){
+      const documentThreshold =
+        rootGetters["documentsModule/documentThreshold"];
+      if (documentThreshold) {
         newSection.threshold = documentThreshold;
       }
-      console.log('Dispatch insert newSection ' + JSON.stringify(newSection));
-      const newSectionId = await dispatch('insert', newSection);
-      const update = {id: newSectionId, updateObject: { id: newSectionId }};
-      console.log('Dispatch updateSection update ' + JSON.stringify(update));
-      await dispatch('updateSection', update);
-      console.log('Return newSectionId ' + JSON.stringify(newSectionId));
+      console.log("Dispatch insert newSection " + JSON.stringify(newSection));
+      let newSectionId = await dispatch(insertByEnv, newSection);
+      const update = { id: newSectionId, updateObject: { id: newSectionId } };
+      console.log("Dispatch updateSection update " + JSON.stringify(update));
+      await dispatch("updateSection", update);
+      console.log("Return newSectionId " + JSON.stringify(newSectionId));
+      return newSectionId;
+    },
+
+    insertToMockData: ({ state }, newSection) => {
+      let newSectionId = uniqid();
+      newSection = { ...newSection, id: newSectionId };
+      Vue.set(state.data, newSectionId, newSection);
       return newSectionId;
     },
     /**
@@ -199,8 +276,22 @@ export const sectionsModule = {
      * @param {string} id the id of the section
      * @param {object} updateObject the keys and values to update
      */
-    updateSection: async ({ dispatch }, { id, updateObject }) => {
-      dispatch('patch', { id, ...updateObject });
+    updateSection: async ({ dispatch, state }, { id, updateObject }) => {
+      dispatch(petchByEnv, { id, updateObject });
+    },
+
+    petchToMockData: ({ state }, { id, updateObject }) => {
+      console.log("petchToMockData: state.data[" + id + "]: " + JSON.stringify(state.data[id]) +
+        ", updateObject: " + JSON.stringify(updateObject));
+      let updatedSection = state.data[id];
+      Object.keys(updateObject).forEach(key => {
+        updatedSection = Object.assign(updatedSection, {
+          [key]: updateObject[key]
+        });
+      });
+      console.log("Vue set state.data " + id + " to ", JSON.stringify(updatedSection));
+      Vue.set(state.data, id, updatedSection);
+      console.log("New state.data[" + id + "]: " + JSON.stringify(state.data[id]));
     },
     /**
      * updates the parent section of the section
@@ -210,7 +301,10 @@ export const sectionsModule = {
      * @param {number} prevStatus the previous status of the section
      *
      */
-    updateParentSection: async ({ state, dispatch }, { parentSectionId, sectionId, newStatus, prevStatus, acceptedByEditor }) => {
+    updateParentSection: async (
+      { state, dispatch },
+      { parentSectionId, sectionId, newStatus, prevStatus, acceptedByEditor }
+    ) => {
       const parentSection = state.data[parentSectionId];
       const currentSection = state.data[sectionId];
       const newStatusName = Object.keys(enums.SECTION_STATUS)[newStatus];
@@ -221,20 +315,22 @@ export const sectionsModule = {
       let updateObject: any = {};
       if (parentSection[newStatusName]) {
         updateObject = {
-          [newStatusName]: [...parentSection[newStatusName], sectionId],
+          [newStatusName]: [...parentSection[newStatusName], sectionId]
         };
       }
 
       if (prevStatus && prevStatus !== enums.SECTION_STATUS.approved) {
         updateObject = {
           ...updateObject,
-          [prevStatusName]: parentSection[prevStatusName].filter((id) => id !== sectionId),
+          [prevStatusName]: parentSection[prevStatusName].filter(
+            id => id !== sectionId
+          )
         };
       }
       if (newStatus === enums.SECTION_STATUS.deleted) {
         updateObject = {
           ...updateObject,
-          status: newStatus,
+          status: newStatus
         };
       }
       if (newStatus === enums.SECTION_STATUS.edited) {
@@ -244,14 +340,23 @@ export const sectionsModule = {
           ...updateObject,
           createdAt: currentSection.createdAt,
           acceptedAt: new Date(),
-          ...(await dispatch('replaceProperties', { sectionId, parentSectionId })),
+          ...(await dispatch("replaceProperties", {
+            sectionId,
+            parentSectionId
+          }))
         };
       }
-      console.log('updating the parent section -> it gets the created and accepted of the EDITED section:', parentSectionId , {...updateObject});
-      if (acceptedByEditor !== null) { updateObject = {...updateObject, acceptedByEditor}; }
-      await dispatch('updateSection', {
+      console.log(
+        "updating the parent section -> it gets the created and accepted of the EDITED section:",
+        parentSectionId,
+        { ...updateObject }
+      );
+      if (acceptedByEditor !== null) {
+        updateObject = { ...updateObject, acceptedByEditor };
+      }
+      await dispatch("updateSection", {
         id: parentSectionId,
-        updateObject: { ...updateObject },
+        updateObject: { ...updateObject }
       });
     },
     /**
@@ -259,11 +364,17 @@ export const sectionsModule = {
      * @param {number} threshold
      */
     updateThreshold: ({ state, getters, dispatch }, { threshold }) => {
-      const sections = [enums.SECTION_STATUS.inTheVote, enums.SECTION_STATUS.toDelete, enums.SECTION_STATUS.toEdit].map((status) => Object.keys(state.data).filter((key) => state.data[key].status === status));
-      return Promise.map(sections.flat(), async (section) => {
-        await dispatch('updateSection', {
+      const sections = [
+        enums.SECTION_STATUS.inTheVote,
+        enums.SECTION_STATUS.toDelete,
+        enums.SECTION_STATUS.toEdit
+      ].map(status =>
+        Object.keys(state.data).filter(key => state.data[key].status === status)
+      );
+      return Promise.map(sections.flat(), async section => {
+        await dispatch("updateSection", {
           id: section,
-          updateObject: { threshold },
+          updateObject: { threshold }
         });
       });
     },
@@ -273,53 +384,75 @@ export const sectionsModule = {
      * @param {string} parentSectionId the parent section id
      * @param {string} sectionId the section id
      * */
-    replaceProperties: async ({ getters, dispatch }, { sectionId, parentSectionId }) => {
-      const keys = ['content', 'contentHtml', 'owner', 'cons', 'pros', 'threshold', 'timer', 'deadline' , 'acceptedByEditor'];
-      const newSection = getters['sectionById'](sectionId)[0];
-      const parentSection = getters['sectionById'](parentSectionId)[0];
+    replaceProperties: async (
+      { getters, dispatch },
+      { sectionId, parentSectionId }
+    ) => {
+      const keys = [
+        "content",
+        "contentHtml",
+        "owner",
+        "cons",
+        "pros",
+        "threshold",
+        "timer",
+        "deadline",
+        "acceptedByEditor"
+      ];
+      const newSection = getters["sectionById"](sectionId)[0];
+      const parentSection = getters["sectionById"](parentSectionId)[0];
       let updateApprovedSection = {};
-      keys.forEach((key) => {
+      keys.forEach(key => {
         updateApprovedSection = {
           ...updateApprovedSection,
-          [key]: newSection[key] ? newSection[key] : null,
+          [key]: newSection[key] ? newSection[key] : null
         };
       });
       let updateEditedSection = {};
-      keys.forEach((key) => {
+      keys.forEach(key => {
         updateEditedSection = {
           ...updateEditedSection,
-          [key]: parentSection[key] ? parentSection[key] : null,
+          [key]: parentSection[key] ? parentSection[key] : null
         };
       });
-      console.log('updating the section:', sectionId, {
-          ...updateEditedSection,
-          acceptedAt: parentSection.acceptedAt,
-          createdAt: parentSection.createdAt,
-        });
-      await dispatch('updateSection', {
+      console.log("updating the section:", sectionId, {
+        ...updateEditedSection,
+        acceptedAt: parentSection.acceptedAt,
+        createdAt: parentSection.createdAt
+      });
+      await dispatch("updateSection", {
         id: sectionId,
         updateObject: {
           ...updateEditedSection,
           acceptedAt: parentSection.acceptedAt,
-          createdAt: parentSection.createdAt,
-        },
+          createdAt: parentSection.createdAt
+        }
       });
-      dispatch('argumentsModule/updateArgumentSectionIds', { oldId: sectionId, newId: parentSectionId }, { root: true });
+      dispatch(
+        "argumentsModule/updateArgumentSectionIds",
+        { oldId: sectionId, newId: parentSectionId },
+        { root: true }
+      );
       return updateApprovedSection;
     },
     /**
      * updates the status of the section if the deadline of the section is over
      */
     updateStatusByDeadline: async ({ state, getters, dispatch }) => {
-      Object.keys(getters.data).forEach(async (sectionId) => {
+      Object.keys(getters.data).forEach(async sectionId => {
         const time = getters.data[sectionId].deadline;
-        if (Object.values(enums.DYNAMIC_STATUS).includes(getters.data[sectionId].status) && getters.isReachedDeadline(time)) {
-          await dispatch('updateSection', {
+        if (
+          Object.values(enums.DYNAMIC_STATUS).includes(
+            getters.data[sectionId].status
+          ) &&
+          getters.isReachedDeadline(time)
+        ) {
+          await dispatch("updateSection", {
             id: sectionId,
-            updateObject: { status: enums.SECTION_STATUS.rejected },
+            updateObject: { status: enums.SECTION_STATUS.rejected }
           });
         }
       });
-    },
-  },
+    }
+  }
 };

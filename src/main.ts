@@ -18,12 +18,18 @@ import VueAnalytics from 'vue-analytics';
 
 console.log('main.ts');
 
-firebase.auth().onAuthStateChanged(async (user) => {
+if (process.env.NODE_ENV !== "development") {
+  firebase.auth().onAuthStateChanged(async (user) => {
   store.commit('usersModule/setIsNewUser');
   if (user) {
     store.dispatch('usersModule/onAuthStateChanged', { user, isNewUser: false });
   }
 });
+} else {
+  const user = require('../database/consenz-test-environment-0/collections/users.json')[0]
+  store.commit('usersModule/setCurrentUser', user);
+
+}
 
 export const eventBus = new Vue();
 

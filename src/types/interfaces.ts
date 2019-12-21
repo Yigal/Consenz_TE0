@@ -69,6 +69,7 @@ export interface ArgumentInterface {// Schema of new arguments
   type?: boolean;
   isOpenArgument?: boolean;
   convinced: string[];
+  id?: string
 }
 
 export interface CommentInterface {
@@ -79,6 +80,8 @@ export interface CommentInterface {
   sectionId: sid;
   documentId: string;
   argumentId: string;
+  id?: string
+
 }
 
 export interface DocumentInterface {

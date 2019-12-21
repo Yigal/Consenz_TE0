@@ -38,12 +38,24 @@ const getters: routerModuleGetter = {
     }
     const isUserVotedTwicePROS = object.pros.includes(userId);
     const isUserVotedTwiceCONS = object.cons.includes(userId);
-
     votes[vote].push(userId);
-
-    isUserVotedTwicePROS ? (votes.pros = object.pros.filter((uid) => uid !== userId)) : null;
-    isUserVotedTwiceCONS ? (votes.cons = object.cons.filter((uid) => uid !== userId)) : null;
-    if (type === 'document' && object.documentConditionalSupport) { isUserVotedTwicePROSconditional ? (votes.prosConditional = object.prosConditional.filter((uid) => uid !== userId)) : null; }
+    let logMessage = 'User ' + userId + ' voted ' + vote;
+    if (isUserVotedTwicePROS) {
+      votes.pros = object.pros.filter((uid) => uid !== userId);
+      logMessage += '\nUser Voted Twice PROS, New votes.pros: ' + JSON.stringify(votes.pros);
+    }
+    if (isUserVotedTwiceCONS) {
+      votes.cons = object.cons.filter((uid) => uid !== userId);
+      logMessage += '\nUser Voted Twice CONS, New votes.cons: ' + JSON.stringify(votes.cons);
+    }
+    if (type === 'document' && object.documentConditionalSupport) {
+      if (isUserVotedTwicePROSconditional) {
+        votes.prosConditional = object.prosConditional.filter((uid) => uid !== userId);
+        logMessage += '\nUser Voted Twice PROS conditional, New votes.prosConditional: ' + JSON.stringify(votes.prosConditional);
+      }
+    }
+    logMessage += "\nNew votes: " + JSON.stringify(votes);
+    console.log(logMessage);
     return votes;
   },
   isSectionReachedToThreshold: (state) => (section, votes) => {
@@ -105,16 +117,16 @@ const actions: ActionTree<VotingModuleState, RootState> = {
    * @param {VotesInterface} vote
    */
   addVote: async ({ state, getters, dispatch, rootGetters }, { type, object, vote }: { type: 'document' | 'section'; object: SectionInterface | DocumentInterface; vote: string }) => {
+    console.log('Add ' + type + ' Vote ' + vote);
     const updatedVotes = getters.updatedVoted(type, object, vote);
     const theModule = `${type}sModule`;
-    await dispatch(
-      `${theModule}/update${type.charAt(0).toUpperCase() + type.slice(1)}`,
-      {
-        id: object.id,
-        updateObject: updatedVotes,
-      },
-      { root: true },
-    );
+    let dispatchType = `${theModule}/update${type.charAt(0).toUpperCase() + type.slice(1)}`;
+    let dispatchPayload = {
+      id: object.id,
+      updateObject: updatedVotes,
+    };
+    console.log('Dispatch ' + dispatchType + ': ' + JSON.stringify(dispatchPayload));
+    await dispatch( dispatchType, dispatchPayload, { root: true });
     return updatedVotes;
   },
   /**

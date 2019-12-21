@@ -76,7 +76,5 @@ export const routes = [
 ];
 export let router = new Router({
   routes,
-  scrollBehavior() {
-    return { x: 0, y: 0 };
-  },
 });
+// # sourceMappingURL=router.js.map

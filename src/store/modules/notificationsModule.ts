@@ -1,4 +1,4 @@
-import { config } from '@/config';
+// import { config } from '@/config';
 import serviceAPI from '@/services/serviceAPI';
 import { MailTitleInterface, MiniUserInterface, SectionInterface } from '@/types/interfaces';
 import * as enums from '@/types/enums';
@@ -21,6 +21,8 @@ export const notificationsModule = {
       title: '',
       body: { text: '', url: '' },
     },
+    config: process.env.NODE_ENV !== "development" ? require('@/config') : {}
+    // domain: process.env.NODE_ENV !== "development" ? 
   },
   getters: {
     toDelete: (state) => state.toDelete,
@@ -102,7 +104,7 @@ export const notificationsModule = {
      */
     getEmailBody: (state, getters, rootState, rootGetters) => (sectionId, newContent, argumentId, commentId) => {
       const documentId = rootGetters['documentsModule/documentId'];
-      const domain = config.firebaseConfig[process.env.NODE_ENV!].domain;
+      const domain = process.env.NODE_ENV !== "development" ? state.config.firebaseConfig[process.env.NODE_ENV!].domain : '';
       return {
         vote: {
           content: `נוסח ההצעה שהתקבלה:
@@ -252,11 +254,11 @@ export const notificationsModule = {
      * sending notifications to users
      * @param {object} emailConfig email configuration to send
      */
-    sendNotifications: async ({ commit, rootGetters }, emailConfig) => {
+    sendNotifications: async ({ commit, rootGetters, state }, emailConfig) => {
       await serviceAPI.sendNotifications({
         ...emailConfig,
         documentId: rootGetters[`mainModule/prettyLink`],
-        authDomain: config.firebaseConfig[process.env.NODE_ENV!].domain,
+        authDomain: process.env.NODE_ENV !== "development" ? state.config.firebaseConfig[process.env.NODE_ENV!].domain : '',
       });
       commit('resetState');
     },

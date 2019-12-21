@@ -1,14 +1,16 @@
 import { CommentInterface } from '@/types/interfaces';
 import Vue from 'vue';
-import * as enums from '@/types/enums';
-import { arrayUnion, arrayRemove } from 'vuex-easy-firestore';
+/*import * as enums from '@/types/enums';
+import { arrayUnion, arrayRemove } from 'vuex-easy-fire$$store';*/
+import { mockDbName, insertByEnv, petchByEnv } from '../index';
+import uniqid from 'uniqid';
 
 export const commentsModule = {
-  firestorePath: 'comments',
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: 'comments',
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: 'collection',
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: 'collection',
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: 'commentsModule',
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
@@ -94,6 +96,22 @@ export const commentsModule = {
         .sort((commentA: CommentInterface, commentB: CommentInterface) => commentA.createdAt.getTime() - commentB.createdAt.getTime()),
   },
   mutations: {
+    loadMockData: (state, payload) => {
+      let mockData = require(`../../../database/${mockDbName}/collections/comments.json`)
+      const dataObject = {}
+      mockData = mockData
+        .filter(d => d.documentId === payload)
+        .map(d =>
+          Object.assign(
+            { ...d },
+            {
+              createdAt: new Date(d.createdAt)
+            }
+          )
+        )
+        .forEach(d => Object.assign(dataObject, { [d.id]: d }))
+      Vue.set(state, "data", dataObject);
+    },
     setCommentsSize: (state, size) => {
       Vue.set(state, 'argumentsSize', size);
     },
@@ -108,8 +126,8 @@ export const commentsModule = {
      * @param sectionId
      * @param argumentId
      */
-    addComment: async ({ context, rootGetters, dispatch, commit }, { content, contentHtml, sectionId, argumentId }: { content: string; contentHtml: string; sectionId: string; argumentId: string }) => {
-      const newComment: CommentInterface = {
+    addComment: async ({ state, rootGetters, dispatch, commit }, { content, contentHtml, sectionId, argumentId }: { content: string; contentHtml: string; sectionId: string; argumentId: string }) => {
+      let newComment: CommentInterface = {
         content,
         contentHtml,
         documentId: rootGetters['documentsModule/documentId'],
@@ -118,7 +136,13 @@ export const commentsModule = {
         sectionId,
         argumentId,
       };
-      return await dispatch('insert', newComment);
+      return await dispatch(insertByEnv, newComment);
+    },
+    insertToMockData: ({state}, newComment) => {
+        let commentId = uniqid();
+        newComment = {...newComment, id: commentId}
+        Vue.set(state.data, commentId, newComment);
+        return commentId;
     },
   },
 };
