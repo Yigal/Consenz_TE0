@@ -37,5 +37,5 @@ export const store = new Vuex.Store({
     version: "1.0.0"
   },
   modules,
-  plugins: process.env.NODE_ENV !== "development" ? [] : []
+  plugins: []
 });

@@ -203,23 +203,10 @@ export const sectionsModule = {
       { state, rootGetters, dispatch, getters, commit },
       status
     ) => {
-      if (state.fetchedSize[status] || process.env.NODE_ENV === "development") {
+      // process.env.NODE_ENV === "development"
         return Object.keys(state.data).filter(
           key => state.data[key].status === status
         ).length;
-      } else {
-        const where = [
-          ["documentId", "==", rootGetters["mainModule/prettyLink"]],
-          ["status", "==", status]
-        ];
-        const querySnapshot = await dispatch("fetch", {
-          where
-        });
-        const size = querySnapshot && querySnapshot.size !== undefined ? querySnapshot.size : 0;
-        commit("setToSize", { status, size });
-        commit("fetchedSize", { status });
-        return size;
-      }
     },
 
     /**
