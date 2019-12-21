@@ -5,11 +5,11 @@ import {insertByEnv, mockDbName, petchByEnv} from "../index";
 import uniqid from 'uniqid';
 
 export const argumentsModule = {
-  firestorePath: "arguments",
-  // The path to a "collection" or single "document" in firestore.
+  //fire$$storePath: "arguments",
+  // The path to a "collection" or single "document" in fire$$store.
   // You can use `{userId}` which will be replaced with the user Id.
-  firestoreRefType: "collection",
-  // `'collection'` or `'doc'`. Depending on your `firestorePath`.
+  //fire$$storeRefType: "collection",
+  // `'collection'` or `'doc'`. Depending on your `fire$$storePath`.
   moduleName: "argumentsModule",
   // The module name. eg. `'userItems'`
   // Can also be a nested module, eg. `'userModule/items'`
@@ -32,7 +32,7 @@ export const argumentsModule = {
     debounceTimerMs: 1000,
     // HOOKS for local changes:
     insertHook(updateStore, doc, store) {
-      // Check vuex-easy-firestore hooks documentation
+      // Check vuex-easy-fire$$store hooks documentation
       return updateStore(doc);
     },
     patchHook(updateStore, doc, store) {
