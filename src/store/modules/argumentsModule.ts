@@ -1,8 +1,7 @@
-import { ArgumentInterface } from "@/types/interfaces";
+import {ArgumentInterface} from "@/types/interfaces";
 import Vue from "vue";
 import * as enums from "@/types/enums";
-//import { arrayUnion, arrayRemove } from "vuex-easy-fire$$store";
-import { mockDbName, insertByEnv, petchByEnv } from "../index";
+import {insertByEnv, mockDbName, petchByEnv} from "../index";
 import uniqid from 'uniqid';
 
 export const argumentsModule = {
@@ -254,9 +253,13 @@ export const argumentsModule = {
      */
     userConvinced: async ({ dispatch, rootGetters, state }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
-      return process.env.NODE_ENV !== "development"
-        ? await dispatch("patch", { id, convinced: [ownerUid]/*arrayUnion(ownerUid)*/ })
-        : state.data[id].convinced.push(ownerUid);
+      // process.env.NODE_ENV === "development"
+      const datum = state.data[id];
+      const convinced = datum.convinced;
+      console.log('userConvinced State ' + id + ' convinced: ' + JSON.stringify(convinced));
+      let size = convinced.push(ownerUid);
+      console.log('Convinced after push: ' + JSON.stringify(convinced));
+      return size;
     },
     /**
      * deleted user the convinced array of the argument
@@ -264,10 +267,16 @@ export const argumentsModule = {
      */
     userUnconvinced: async ({ dispatch, rootGetters, state }, id) => {
       const ownerUid = rootGetters["usersModule/userUid"];
-      const filtered = state.data[id].convinced.filter(uid => uid !== ownerUid)
-      return process.env.NODE_ENV !== "development"
-      ? await dispatch("patch", { id, convinced: [ownerUid]/*arrayRemove(ownerUid)*/ })
-      : Vue.set(state.data[id], "convinced", filtered);
+      const datum = state.data[id];
+      console.log('userUnconvinced State ' + id + ' convinced: ' + JSON.stringify(datum.convinced));
+      const filtered = datum.convinced.filter(function (uid) {
+        return uid !== ownerUid;
+      });
+      console.log('Filtered: ' + JSON.stringify(filtered));
+      // process.env.NODE_ENV === "development"
+      const ans = Vue.set(datum, "convinced", filtered);
+      console.log('Convinced after Vue set to filtered: ' + JSON.stringify(datum.convinced));
+      return ans;
     },
     /**
      * updating the arguments sectionsId after voting ends
