@@ -104,44 +104,9 @@ export const mainModule = {
      * opens the DB channels of all the modules
      */
     initStore: async ({ state, dispatch, commit, rootGetters }) => {
-
-      if (process.env.NODE_ENV === 'development') {
-        console.log('developing');
-        dispatch('initStoreWithMochData');
-      } else {
-        try {
-          console.log('mainModule.ts Dispatch openDBChannel');
-          await dispatch('openDBChannel', { version: 'v1' }).catch((error) => {
-            if (error === 'preventInitialDocInsertion') {
-              console.log('mainModule.ts ERROR IN openDBChannel OF CONSENZ:', error);
-              return;
-            }
-          });
-          await dispatch('documentsModule/fetchById', state.prettyLink, { root: true });
-          console.log('mainModule.ts Dispatch sectionsModule/openDBChannel');
-          await dispatch('sectionsModule/openDBChannel', { where: [['documentId', '==', state.prettyLink]] }, { root: true });
-          console.log('mainModule.ts Dispatch argumentsModule/openDBChannel');
-          await dispatch('argumentsModule/openDBChannel', { where: [['documentId', '==', state.prettyLink]] }, { root: true });
-          await dispatch('commentsModule/openDBChannel', { where: [['documentId', '==', state.prettyLink]] }, { root: true });
-          await dispatch(
-            'usersModule/openDBChannel',
-            {
-              where: [['documents', 'array-contains', state.prettyLink]],
-            },
-            { root: true },
-          );
-
-        } catch (error) {
-          console.error(error);
-        } finally {
-          commit('setLoading', false);
-          commit('documentsModule/setPrettyLink', state.prettyLink, { root: true });
-          const payload = { currentRoute: router.currentRoute };
-          console.log('mainModule.ts Commit setToState ' + payload);
-          commit('routerModule/setToState', payload, { root: true });
-        }
-      }
-
+      // process.env.NODE_ENV === "development"
+      console.log('developing');
+      dispatch('initStoreWithMochData');
     },
     initStoreWithMochData: ({state, commit}) => {
       commit('documentsModule/setPrettyLink', state.prettyLink, { root: true });
