@@ -22,7 +22,7 @@ export const notificationsModule = {
       body: { text: '', url: '' },
     },
     config: process.env.NODE_ENV !== "development" ? require('@/config') : {}
-    // domain: process.env.NODE_ENV !== "development" ? 
+    // domain: process.env.NODE_ENV !== "development" ?
   },
   getters: {
     toDelete: (state) => state.toDelete,
@@ -267,9 +267,7 @@ export const notificationsModule = {
       return await dispatch('usersModule/getBatchUsersNotificationProp', { users: recipients }, { root: true });
     },
   },
-  /** for vuex-easy-module */
-  firestorePath: '',
-  firestoreRefType: '',
+
   moduleName: '',
   statePropName: '',
   sync: {},

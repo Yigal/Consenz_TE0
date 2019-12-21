@@ -98,9 +98,7 @@ export const displayModule = {
     },
   },
   actions: {},
-  /** for vuex-easy-module */
-  firestorePath: '',
-  firestoreRefType: '',
+
   moduleName: '',
   statePropName: '',
   sync: {},

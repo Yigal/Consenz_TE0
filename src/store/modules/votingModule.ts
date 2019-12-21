@@ -255,9 +255,7 @@ export const votingModule = {
   getters,
   mutations,
   actions,
-  /** for vuex-easy-module */
-  firestorePath: '',
-  firestoreRefType: '',
+
   moduleName: '',
   statePropName: '',
   sync: {},
